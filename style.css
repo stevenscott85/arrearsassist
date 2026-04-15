@@ -95,7 +95,8 @@ a {
 .result-card,
 .capture-card,
 .premium-card,
-.premium-footer-card {
+.premium-footer-card,
+.eviction-guidance-card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -169,7 +170,8 @@ a {
 .hero-card ul,
 .side-card ul,
 .premium-card ul,
-.premium-card ol {
+.premium-card ol,
+.eviction-guidance-list {
   margin: 0;
   padding-left: 20px;
 }
@@ -220,7 +222,8 @@ a {
 .tool-card h2,
 .result-card h2,
 .capture-card h2,
-.premium-header h2 {
+.premium-header h2,
+.eviction-guidance-card h2 {
   margin: 0 0 8px;
   font-size: 2rem;
   line-height: 1.1;
@@ -335,7 +338,7 @@ a {
 }
 
 .result-section {
-  padding: 0 0 50px;
+  padding: 0 0 30px;
 }
 
 .result-layout {
@@ -356,14 +359,18 @@ a {
 
 .result-group h3,
 .premium-card h3,
-.premium-footer-card h3 {
+.premium-footer-card h3,
+.result-cta-box h3,
+.eviction-guidance-card h3 {
   margin: 0 0 8px;
   font-size: 1.1rem;
 }
 
 .result-group p,
 .premium-card p,
-.premium-footer-card p {
+.premium-footer-card p,
+.result-cta-text,
+.eviction-guidance-text {
   margin: 0;
   color: var(--muted);
 }
@@ -373,6 +380,43 @@ a {
   border: 1px solid var(--warning-border);
   padding: 18px;
   border-radius: 14px;
+}
+
+.result-cta-box {
+  margin-top: 22px;
+  padding: 22px;
+  background: #f8fbff;
+  border: 1px solid #dbe7ff;
+  border-radius: 16px;
+}
+
+.result-cta-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.result-cta-note {
+  margin: 14px 0 0;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.eviction-guidance-section {
+  padding: 0 0 30px;
+}
+
+.eviction-guidance-card {
+  padding: 32px;
+}
+
+.eviction-guidance-list {
+  margin-top: 18px;
+}
+
+.eviction-guidance-actions {
+  margin-top: 20px;
 }
 
 .premium-section {
@@ -440,14 +484,16 @@ a {
   .result-card,
   .capture-card,
   .premium-card,
-  .premium-footer-card {
+  .premium-footer-card,
+  .eviction-guidance-card {
     padding: 24px;
   }
 
   .tool-card h2,
   .result-card h2,
   .capture-card h2,
-  .premium-header h2 {
+  .premium-header h2,
+  .eviction-guidance-card h2 {
     font-size: 1.7rem;
   }
 }
@@ -473,5 +519,13 @@ a {
   .question-block select,
   .question-block input {
     min-height: 50px;
+  }
+
+  .result-cta-actions {
+    flex-direction: column;
+  }
+
+  .result-cta-actions .btn {
+    width: 100%;
   }
 }
