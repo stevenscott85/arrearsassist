@@ -6,6 +6,7 @@ const leadError = document.getElementById("lead-error");
 
 const freeResultSection = document.getElementById("free-result-section");
 const premiumSection = document.getElementById("premium-section");
+const evictionGuidanceSection = document.getElementById("eviction-guidance-section");
 
 const freeStageTitle = document.getElementById("free-stage-title");
 const freeNextStep = document.getElementById("free-next-step");
@@ -17,6 +18,11 @@ const premiumPriority = document.getElementById("premium-priority");
 const premiumActions = document.getElementById("premium-actions");
 const premiumRisks = document.getElementById("premium-risks");
 const premiumEvidence = document.getElementById("premium-evidence");
+
+const scrollToUnlockBtn = document.getElementById("scroll-to-unlock");
+const showEvictionGuidanceBtn = document.getElementById("show-eviction-guidance");
+const evictionScrollToUnlockBtn = document.getElementById("eviction-scroll-to-unlock");
+const leadCaptureCard = document.getElementById("lead-capture-card");
 
 let lastAssessment = null;
 
@@ -46,6 +52,8 @@ arrearsForm.addEventListener("submit", function (event) {
 
   freeResultSection.classList.remove("hidden");
   premiumSection.classList.add("hidden");
+  evictionGuidanceSection.classList.add("hidden");
+
   freeResultSection.scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
@@ -83,6 +91,19 @@ leadForm.addEventListener("submit", function (event) {
   renderPremiumResult(firstName, lastAssessment);
   premiumSection.classList.remove("hidden");
   premiumSection.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+scrollToUnlockBtn.addEventListener("click", function () {
+  leadCaptureCard.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+showEvictionGuidanceBtn.addEventListener("click", function () {
+  evictionGuidanceSection.classList.remove("hidden");
+  evictionGuidanceSection.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+evictionScrollToUnlockBtn.addEventListener("click", function () {
+  leadCaptureCard.scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
 function buildAssessment(data) {
