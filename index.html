@@ -1,1 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ArrearsAssist | Rent arrears next step checker</title>
+  <meta
+    name="description"
+    content="Free rent arrears next step checker for England private landlords. Find your next step, spot risks, and unlock a full arrears action plan."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">ArrearsAssist</div>
+      <a href="#tool" class="header-link">Start free check</a>
+    </div>
+  </header>
 
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <span class="eyebrow">England private landlords</span>
+          <h1>Rent arrears? Find your next step in 60 seconds.</h1>
+          <p class="hero-text">
+            Free tool to help you understand your current arrears stage,
+            spot risk issues, and see what to do next.
+          </p>
+          <div class="hero-actions">
+            <a href="#tool" class="btn btn-primary">Start free check</a>
+            <a href="#how-it-works" class="btn btn-secondary">See how it works</a>
+          </div>
+          <p class="hero-note">
+            For guidance and organisation only. Not legal advice.
+          </p>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-card-badge">Free</div>
+          <h2>What you get</h2>
+          <ul>
+            <li>Your arrears stage</li>
+            <li>Your next step</li>
+            <li>Basic risk warning</li>
+            <li>Option to unlock full arrears plan</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust-strip" id="how-it-works">
+      <div class="container trust-grid">
+        <div class="trust-item">
+          <strong>Built for England landlords</strong>
+          <p>Focused on private landlord arrears situations only.</p>
+        </div>
+        <div class="trust-item">
+          <strong>Plain English</strong>
+          <p>No waffle. Just the next step and the risks to watch.</p>
+        </div>
+        <div class="trust-item">
+          <strong>Designed to reduce mistakes</strong>
+          <p>Helps you organise before things spiral.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="tool-section" id="tool">
+      <div class="container tool-layout">
+        <div class="tool-card">
+          <div class="section-tag">Free checker</div>
+          <h2>Answer these 7 questions</h2>
+          <p class="section-text">
+            This takes less than a minute. You will get a free basic result on screen.
+          </p>
+
+          <form id="arrears-form" novalidate>
+            <div class="question-block">
+              <label for="arrearsMonths">1. How many months of rent arrears?</label>
+              <select id="arrearsMonths" name="arrearsMonths" required>
+                <option value="">Select one</option>
+                <option value="less-than-1">Less than 1 month</option>
+                <option value="one-to-two">1 to 2 months</option>
+                <option value="two-plus">2+ months</option>
+              </select>
+            </div>
+
+            <div class="question-block">
+              <label for="paymentStatus">2. Is the tenant currently paying anything?</label>
+              <select id="paymentStatus" name="paymentStatus" required>
+                <option value="">Select one</option>
+                <option value="partial">Yes, partial payments</option>
+                <option value="none">No payments at all</option>
+              </select>
+            </div>
+
+            <div class="question-block">
+              <label for="disrepair">3. Has the tenant raised disrepair issues?</label>
+              <select id="disrepair" name="disrepair" required>
+                <option value="">Select one</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </div>
+
+            <div class="question-block">
+              <label for="accessAttempts">4. Have you attempted access for repairs?</label>
+              <select id="accessAttempts" name="accessAttempts" required>
+                <option value="">Select one</option>
+                <option value="refused">Yes, and tenant refused</option>
+                <option value="allowed">Yes, and tenant allowed</option>
+                <option value="no-attempt">No</option>
+              </select>
+            </div>
+
+            <div class="question-block">
+              <label for="uc">5. Is the tenant on Universal Credit?</label>
+              <select id="uc" name="uc" required>
+                <option value="">Select one</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+                <option value="not-sure">Not sure</option>
+              </select>
+            </div>
+
+            <div class="question-block">
+              <label for="paymentRecord">6. Do you have a written record of missed payments?</label>
+              <select id="paymentRecord" name="paymentRecord" required>
+                <option value="">Select one</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </div>
+
+            <div class="question-block">
+              <label for="formalContact">7. Have you formally contacted the tenant about arrears?</label>
+              <select id="formalContact" name="formalContact" required>
+                <option value="">Select one</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary btn-full">Get my result</button>
+              <p id="form-error" class="form-error" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
+
+        <aside class="side-panel">
+          <div class="side-card">
+            <h3>What this checks</h3>
+            <ul>
+              <li>Arrears seriousness</li>
+              <li>Payment pattern risk</li>
+              <li>Disrepair risk</li>
+              <li>Access risk</li>
+              <li>Record keeping gaps</li>
+            </ul>
+          </div>
+
+          <div class="side-card">
+            <h3>Best for</h3>
+            <p>
+              England private landlords who want a clearer next step when a tenant falls behind on rent.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="free-result-section" class="result-section hidden">
+      <div class="container result-layout">
+        <div class="result-card">
+          <div class="section-tag">Your free result</div>
+          <h2 id="free-stage-title">Your arrears stage</h2>
+
+          <div class="result-group">
+            <h3>Your next step</h3>
+            <p id="free-next-step"></p>
+          </div>
+
+          <div class="result-group warning-box">
+            <h3>Basic warning</h3>
+            <p id="free-warning"></p>
+          </div>
+        </div>
+
+        <div class="capture-card">
+          <div class="section-tag">Free checklist</div>
+          <h2>Send me the free arrears checklist</h2>
+          <p>
+            Enter your first name and email to unlock your full tailored arrears plan on screen.
+          </p>
+
+          <form id="lead-form" novalidate>
+            <div class="question-block">
+              <label for="firstName">First name</label>
+              <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required />
+            </div>
+
+            <div class="question-block">
+              <label for="email">Email address</label>
+              <input type="email" id="email" name="email" placeholder="Enter your email address" required />
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-full">
+              Unlock full arrears plan
+            </button>
+
+            <p id="lead-error" class="form-error" aria-live="polite"></p>
+            <p class="small-print">
+              By continuing, you agree to receive follow up emails about your arrears checklist and related updates.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="premium-section" class="premium-section hidden">
+      <div class="container">
+        <div class="premium-header">
+          <div>
+            <div class="section-tag premium-tag">Full plan unlocked</div>
+            <h2 id="premium-greeting">Your full arrears action plan</h2>
+          </div>
+        </div>
+
+        <div class="premium-grid">
+          <div class="premium-card">
+            <h3>Your arrears stage</h3>
+            <p id="premium-stage"></p>
+          </div>
+
+          <div class="premium-card">
+            <h3>Your immediate priority</h3>
+            <p id="premium-priority"></p>
+          </div>
+
+          <div class="premium-card full-width">
+            <h3>Your step by step action plan</h3>
+            <ol id="premium-actions"></ol>
+          </div>
+
+          <div class="premium-card">
+            <h3>Risk flags</h3>
+            <ul id="premium-risks"></ul>
+          </div>
+
+          <div class="premium-card">
+            <h3>Evidence checklist</h3>
+            <ul id="premium-evidence"></ul>
+          </div>
+        </div>
+
+        <div class="premium-footer-card">
+          <h3>Next upgrade idea</h3>
+          <p>
+            Later you can turn this into a paid report, saved cases, printable logs, and a full evidence builder.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>ArrearsAssist</p>
+      <p>Guidance and organisation only. Not legal advice.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
