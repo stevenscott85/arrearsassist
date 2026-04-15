@@ -26,85 +26,101 @@ const leadCaptureCard = document.getElementById("lead-capture-card");
 
 let lastAssessment = null;
 
-arrearsForm.addEventListener("submit", function (event) {
-  event.preventDefault();
-  formError.textContent = "";
+if (arrearsForm) {
+  arrearsForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    formError.textContent = "";
 
-  const formData = {
-    arrearsMonths: document.getElementById("arrearsMonths").value,
-    paymentStatus: document.getElementById("paymentStatus").value,
-    disrepair: document.getElementById("disrepair").value,
-    accessAttempts: document.getElementById("accessAttempts").value,
-    uc: document.getElementById("uc").value,
-    paymentRecord: document.getElementById("paymentRecord").value,
-    formalContact: document.getElementById("formalContact").value,
-  };
+    const formData = {
+      arrearsMonths: document.getElementById("arrearsMonths").value,
+      paymentStatus: document.getElementById("paymentStatus").value,
+      disrepair: document.getElementById("disrepair").value,
+      accessAttempts: document.getElementById("accessAttempts").value,
+      uc: document.getElementById("uc").value,
+      paymentRecord: document.getElementById("paymentRecord").value,
+      formalContact: document.getElementById("formalContact").value,
+    };
 
-  const emptyField = Object.values(formData).some((value) => !value);
+    const emptyField = Object.values(formData).some((value) => !value);
 
-  if (emptyField) {
-    formError.textContent = "Please answer all 7 questions first.";
-    return;
-  }
+    if (emptyField) {
+      formError.textContent = "Please answer all 7 questions first.";
+      return;
+    }
 
-  lastAssessment = buildAssessment(formData);
-  renderFreeResult(lastAssessment);
+    lastAssessment = buildAssessment(formData);
+    renderFreeResult(lastAssessment);
 
-  freeResultSection.classList.remove("hidden");
-  premiumSection.classList.add("hidden");
-  evictionGuidanceSection.classList.add("hidden");
+    freeResultSection.classList.remove("hidden");
+    premiumSection.classList.add("hidden");
+    evictionGuidanceSection.classList.add("hidden");
 
-  freeResultSection.scrollIntoView({ behavior: "smooth", block: "start" });
-});
+    freeResultSection.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
 
-leadForm.addEventListener("submit", function (event) {
-  event.preventDefault();
-  leadError.textContent = "";
+if (leadForm) {
+  leadForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+    leadError.textContent = "";
 
-  if (!lastAssessment) {
-    leadError.textContent = "Please complete the arrears check first.";
-    return;
-  }
+    if (!lastAssessment) {
+      leadError.textContent = "Please complete the arrears check first.";
+      return;
+    }
 
-  const firstName = document.getElementById("firstName").value.trim();
-  const email = document.getElementById("email").value.trim();
+    const firstName = document.getElementById("firstName").value.trim();
+    const email = document.getElementById("email").value.trim();
 
-  if (!firstName || !email) {
-    leadError.textContent = "Please enter your first name and email address.";
-    return;
-  }
+    if (!firstName || !email) {
+      leadError.textContent = "Please enter your first name and email address.";
+      return;
+    }
 
-  if (!isValidEmail(email)) {
-    leadError.textContent = "Please enter a valid email address.";
-    return;
-  }
+    if (!isValidEmail(email)) {
+      leadError.textContent = "Please enter a valid email address.";
+      return;
+    }
 
-  const savedLead = {
-    firstName,
-    email,
-    assessment: lastAssessment,
-    createdAt: new Date().toISOString(),
-  };
+    const savedLead = {
+      firstName,
+      email,
+      assessment: lastAssessment,
+      createdAt: new Date().toISOString(),
+    };
 
-  localStorage.setItem("arrearsAssistLead", JSON.stringify(savedLead));
+    localStorage.setItem("arrearsAssistLead", JSON.stringify(savedLead));
 
-  renderPremiumResult(firstName, lastAssessment);
-  premiumSection.classList.remove("hidden");
-  premiumSection.scrollIntoView({ behavior: "smooth", block: "start" });
-});
+    renderPremiumResult(firstName, lastAssessment);
+    premiumSection.classList.remove("hidden");
+    premiumSection.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
 
-scrollToUnlockBtn.addEventListener("click", function () {
-  leadCaptureCard.scrollIntoView({ behavior: "smooth", block: "start" });
-});
+if (scrollToUnlockBtn) {
+  scrollToUnlockBtn.addEventListener("click", function () {
+    if (leadCaptureCard) {
+      leadCaptureCard.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+}
 
-showEvictionGuidanceBtn.addEventListener("click", function () {
-  evictionGuidanceSection.classList.remove("hidden");
-  evictionGuidanceSection.scrollIntoView({ behavior: "smooth", block: "start" });
-});
+if (showEvictionGuidanceBtn) {
+  showEvictionGuidanceBtn.addEventListener("click", function () {
+    if (evictionGuidanceSection) {
+      evictionGuidanceSection.classList.remove("hidden");
+      evictionGuidanceSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+}
 
-evictionScrollToUnlockBtn.addEventListener("click", function () {
-  leadCaptureCard.scrollIntoView({ behavior: "smooth", block: "start" });
-});
+if (evictionScrollToUnlockBtn) {
+  evictionScrollToUnlockBtn.addEventListener("click", function () {
+    if (leadCaptureCard) {
+      leadCaptureCard.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+}
 
 function buildAssessment(data) {
   const risks = [];
