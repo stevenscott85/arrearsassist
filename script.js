@@ -7,6 +7,7 @@ const leadError = document.getElementById("lead-error");
 const freeResultSection = document.getElementById("free-result-section");
 const premiumSection = document.getElementById("premium-section");
 const evictionGuidanceSection = document.getElementById("eviction-guidance-section");
+const paidSection = document.getElementById("paid-section");
 
 const freeStageTitle = document.getElementById("free-stage-title");
 const freeNextStep = document.getElementById("free-next-step");
@@ -19,10 +20,10 @@ const premiumActions = document.getElementById("premium-actions");
 const premiumRisks = document.getElementById("premium-risks");
 const premiumEvidence = document.getElementById("premium-evidence");
 
-const scrollToUnlockBtn = document.getElementById("scroll-to-unlock");
+const showPaidSectionBtn = document.getElementById("show-paid-section");
 const showEvictionGuidanceBtn = document.getElementById("show-eviction-guidance");
-const evictionScrollToUnlockBtn = document.getElementById("eviction-scroll-to-unlock");
-const leadCaptureCard = document.getElementById("lead-capture-card");
+const evictionShowPaidSectionBtn = document.getElementById("eviction-show-paid-section");
+const continueToPaymentBtn = document.getElementById("continue-to-payment");
 
 let lastAssessment = null;
 
@@ -54,6 +55,7 @@ if (arrearsForm) {
     freeResultSection.classList.remove("hidden");
     premiumSection.classList.add("hidden");
     evictionGuidanceSection.classList.add("hidden");
+    paidSection.classList.add("hidden");
 
     freeResultSection.scrollIntoView({ behavior: "smooth", block: "start" });
   });
@@ -97,28 +99,30 @@ if (leadForm) {
   });
 }
 
-if (scrollToUnlockBtn) {
-  scrollToUnlockBtn.addEventListener("click", function () {
-    if (leadCaptureCard) {
-      leadCaptureCard.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+if (showPaidSectionBtn) {
+  showPaidSectionBtn.addEventListener("click", function () {
+    paidSection.classList.remove("hidden");
+    paidSection.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 }
 
 if (showEvictionGuidanceBtn) {
   showEvictionGuidanceBtn.addEventListener("click", function () {
-    if (evictionGuidanceSection) {
-      evictionGuidanceSection.classList.remove("hidden");
-      evictionGuidanceSection.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    evictionGuidanceSection.classList.remove("hidden");
+    evictionGuidanceSection.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 }
 
-if (evictionScrollToUnlockBtn) {
-  evictionScrollToUnlockBtn.addEventListener("click", function () {
-    if (leadCaptureCard) {
-      leadCaptureCard.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+if (evictionShowPaidSectionBtn) {
+  evictionShowPaidSectionBtn.addEventListener("click", function () {
+    paidSection.classList.remove("hidden");
+    paidSection.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
+
+if (continueToPaymentBtn) {
+  continueToPaymentBtn.addEventListener("click", function () {
+    alert("Stripe checkout will be connected next.");
   });
 }
 
