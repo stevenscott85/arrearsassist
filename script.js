@@ -20,10 +20,7 @@ const premiumActions = document.getElementById("premium-actions");
 const premiumRisks = document.getElementById("premium-risks");
 const premiumEvidence = document.getElementById("premium-evidence");
 
-const showPaidSectionBtn = document.getElementById("show-paid-section");
 const showEvictionGuidanceBtn = document.getElementById("show-eviction-guidance");
-const evictionShowPaidSectionBtn = document.getElementById("eviction-show-paid-section");
-const continueToPaymentBtn = document.getElementById("continue-to-payment");
 
 let lastAssessment = null;
 
@@ -93,16 +90,7 @@ if (leadForm) {
 
     localStorage.setItem("arrearsAssistLead", JSON.stringify(savedLead));
 
-    renderPremiumResult(firstName, lastAssessment);
-    premiumSection.classList.remove("hidden");
-    premiumSection.scrollIntoView({ behavior: "smooth", block: "start" });
-  });
-}
-
-if (showPaidSectionBtn) {
-  showPaidSectionBtn.addEventListener("click", function () {
-    paidSection.classList.remove("hidden");
-    paidSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    renderFreeChecklistConfirmation(firstName);
   });
 }
 
@@ -110,19 +98,6 @@ if (showEvictionGuidanceBtn) {
   showEvictionGuidanceBtn.addEventListener("click", function () {
     evictionGuidanceSection.classList.remove("hidden");
     evictionGuidanceSection.scrollIntoView({ behavior: "smooth", block: "start" });
-  });
-}
-
-if (evictionShowPaidSectionBtn) {
-  evictionShowPaidSectionBtn.addEventListener("click", function () {
-    paidSection.classList.remove("hidden");
-    paidSection.scrollIntoView({ behavior: "smooth", block: "start" });
-  });
-}
-
-if (continueToPaymentBtn) {
-  continueToPaymentBtn.addEventListener("click", function () {
-    alert("Stripe checkout will be connected next.");
   });
 }
 
@@ -308,6 +283,56 @@ function renderPremiumResult(firstName, assessment) {
     li.textContent = item;
     premiumEvidence.appendChild(li);
   });
+}
+
+function renderFreeChecklistConfirmation(firstName) {
+  const leadCaptureCard = document.getElementById("lead-capture-card");
+
+  if (!leadCaptureCard) {
+    return;
+  }
+
+  leadCaptureCard.innerHTML = `
+    <div class="section-tag">Checklist requested</div>
+    <h2>Nice one, ${escapeHtml(firstName)}</h2>
+    <p>
+      Your free arrears checklist request has been captured.
+    </p>
+    <div class="result-group warning-box">
+      <h3>What happens next</h3>
+      <p>
+        You should check your inbox once email delivery is connected. For now, your free route is captured and your paid route stays separate.
+      </p>
+    </div>
+    <div class="result-cta-box">
+      <h3>Want the full system now?</h3>
+      <p class="result-cta-text">
+        The full arrears system includes the full action plan, templates, tracking tools, and structured escalation guidance.
+      </p>
+      <div class="result-cta-actions">
+        <a
+          href="https://buy.stripe.com/test_9B6fZh3uNgunbcxaEYasg00"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-primary"
+        >
+          Unlock full arrears plan
+        </a>
+      </div>
+      <p class="result-cta-note">
+        This opens the Stripe checkout. The free checklist and paid upgrade are now separate routes.
+      </p>
+    </div>
+  `;
+}
+
+function escapeHtml(value) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 }
 
 function isValidEmail(email) {
