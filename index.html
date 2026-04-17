@@ -3,49 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ArrearsAssist | Rent arrears next step checker</title>
-  <meta
-    name="description"
-    content="Free rent arrears next step checker for England private landlords. Find your next step, spot risks, and unlock a full arrears action plan."
-  />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  />
+  <title>ArrearsAssist</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
       <div class="brand">ArrearsAssist</div>
-      <a href="#tool" class="header-link">Start free check</a>
+      <a href="#arrears-checker" class="header-link">Start free check</a>
     </div>
   </header>
 
   <main>
-    <section class="hero">
-      <div class="container hero-inner">
-        <div class="hero-copy">
-          <span class="eyebrow">England private landlords</span>
+    <section class="hero-section">
+      <div class="container hero-grid">
+        <div class="card hero-card">
+          <div class="pill">England private landlords</div>
           <h1>Rent arrears? Find your next step in 60 seconds.</h1>
           <p class="hero-text">
-            Free tool to help you understand your current arrears stage, spot risk
-            issues, and see what to do next.
+            Free tool to help you understand your current arrears stage, spot risk issues, and see what to do next.
           </p>
           <div class="hero-actions">
-            <a href="#tool" class="btn btn-primary">Start free check</a>
-            <a href="#how-it-works" class="btn btn-secondary">See how it works</a>
+            <a href="#arrears-checker" class="btn btn-primary">Start free check</a>
+            <a href="#guarantor-system" class="btn btn-secondary">See guarantor system</a>
           </div>
-          <p class="hero-note">
+          <p class="microcopy">
             For guidance and organisation only. Not legal advice.
           </p>
         </div>
 
-        <div class="hero-card">
-          <div class="hero-card-badge">Free</div>
-          <h2>What you get</h2>
+        <div class="card side-card">
+          <div class="pill pill-dark">Free</div>
+          <h3>What you get</h3>
           <ul>
             <li>Your arrears stage</li>
             <li>Your next step</li>
@@ -57,108 +46,106 @@
       </div>
     </section>
 
-    <section class="trust-strip" id="how-it-works">
-      <div class="container trust-grid">
-        <div class="trust-item">
-          <strong>Built for England landlords</strong>
+    <section class="feature-strip">
+      <div class="container strip-grid">
+        <div class="card small-card">
+          <h4>Built for England landlords</h4>
           <p>Focused on private landlord arrears situations only.</p>
         </div>
-        <div class="trust-item">
-          <strong>Plain English</strong>
+        <div class="card small-card">
+          <h4>Plain English</h4>
           <p>No waffle. Just the next step and the risks to watch.</p>
         </div>
-        <div class="trust-item">
-          <strong>Designed to reduce mistakes</strong>
+        <div class="card small-card">
+          <h4>Designed to reduce mistakes</h4>
           <p>Helps you organise before things spiral.</p>
         </div>
       </div>
     </section>
 
-    <section class="tool-section" id="tool">
-      <div class="container tool-layout">
-        <div class="tool-card">
-          <div class="section-tag">Free checker</div>
+    <section id="arrears-checker" class="checker-section">
+      <div class="container checker-grid">
+        <div class="card checker-card">
+          <div class="pill">Free checker</div>
           <h2>Answer these 7 questions</h2>
           <p class="section-text">
             This takes less than a minute. You will get a free basic result on screen.
           </p>
 
-          <form id="arrears-form" novalidate>
-            <div class="question-block">
+          <form id="arrearsForm">
+            <div class="form-group">
               <label for="arrearsMonths">1. How many months of rent arrears?</label>
-              <select id="arrearsMonths" name="arrearsMonths" required>
+              <select id="arrearsMonths" required>
                 <option value="">Select one</option>
-                <option value="less-than-1">Less than 1 month</option>
-                <option value="one-to-two">1 to 2 months</option>
-                <option value="two-plus">2+ months</option>
+                <option value="lt1">Less than 1 month</option>
+                <option value="1to2">1 to 2 months</option>
+                <option value="2plus">More than 2 months</option>
               </select>
             </div>
 
-            <div class="question-block">
-              <label for="paymentStatus">2. Is the tenant currently paying anything?</label>
-              <select id="paymentStatus" name="paymentStatus" required>
+            <div class="form-group">
+              <label for="payingAnything">2. Is the tenant currently paying anything?</label>
+              <select id="payingAnything" required>
                 <option value="">Select one</option>
+                <option value="full">Yes, paying in full</option>
                 <option value="partial">Yes, partial payments</option>
                 <option value="none">No payments at all</option>
               </select>
             </div>
 
-            <div class="question-block">
-              <label for="disrepair">3. Has the tenant raised disrepair issues?</label>
-              <select id="disrepair" name="disrepair" required>
+            <div class="form-group">
+              <label for="disrepairRaised">3. Has the tenant raised disrepair issues?</label>
+              <select id="disrepairRaised" required>
+                <option value="">Select one</option>
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="attemptedAccess">4. Have you attempted access for repairs?</label>
+              <select id="attemptedAccess" required>
+                <option value="">Select one</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+                <option value="na">Not applicable</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="onUniversalCredit">5. Is the tenant on Universal Credit?</label>
+              <select id="onUniversalCredit" required>
+                <option value="">Select one</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+                <option value="unknown">Not sure</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="writtenRecord">6. Do you have a written record of missed payments?</label>
+              <select id="writtenRecord" required>
                 <option value="">Select one</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
               </select>
             </div>
 
-            <div class="question-block">
-              <label for="accessAttempts">4. Have you attempted access for repairs?</label>
-              <select id="accessAttempts" name="accessAttempts" required>
-                <option value="">Select one</option>
-                <option value="refused">Yes, and tenant refused</option>
-                <option value="allowed">Yes, and tenant allowed</option>
-                <option value="no-attempt">No</option>
-              </select>
-            </div>
-
-            <div class="question-block">
-              <label for="uc">5. Is the tenant on Universal Credit?</label>
-              <select id="uc" name="uc" required>
-                <option value="">Select one</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-                <option value="not-sure">Not sure</option>
-              </select>
-            </div>
-
-            <div class="question-block">
-              <label for="paymentRecord">6. Do you have a written record of missed payments?</label>
-              <select id="paymentRecord" name="paymentRecord" required>
-                <option value="">Select one</option>
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-              </select>
-            </div>
-
-            <div class="question-block">
+            <div class="form-group">
               <label for="formalContact">7. Have you formally contacted the tenant about arrears?</label>
-              <select id="formalContact" name="formalContact" required>
+              <select id="formalContact" required>
                 <option value="">Select one</option>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
               </select>
             </div>
 
-            <div class="form-actions">
-              <button type="submit" class="btn btn-primary btn-full">Get my result</button>
-              <p id="form-error" class="form-error" aria-live="polite"></p>
-            </div>
+            <button type="submit" class="btn btn-primary btn-full">Get my result</button>
           </form>
         </div>
 
-        <aside class="side-panel">
-          <div class="side-card">
+        <div class="checker-sidebar">
+          <div class="card side-card">
             <h3>What this checks</h3>
             <ul>
               <li>Arrears seriousness</li>
@@ -169,145 +156,103 @@
             </ul>
           </div>
 
-          <div class="side-card">
+          <div class="card side-card">
             <h3>Best for</h3>
             <p>
               England private landlords who want a clearer next step when a tenant falls behind on rent.
             </p>
           </div>
-        </aside>
+        </div>
       </div>
     </section>
 
-    <section id="free-result-section" class="result-section hidden">
-      <div class="container result-layout">
-        <div class="result-card">
-          <div class="section-tag">Your free result</div>
-          <h2 id="free-stage-title">Your arrears stage</h2>
+    <section id="arrearsResultSection" class="result-section hidden">
+      <div class="container result-grid">
+        <div class="card result-card">
+          <div class="pill">Your free result</div>
+          <h2 id="resultTitle">You are in early to mid stage rent arrears.</h2>
 
-          <div class="result-group">
-            <h3>Your next step</h3>
-            <p id="free-next-step"></p>
+          <h3>Your next step</h3>
+          <p id="resultNextStep" class="section-text"></p>
+
+          <div class="warning-box">
+            <h4>Basic warning</h4>
+            <p id="resultWarning"></p>
           </div>
 
-          <div class="result-group warning-box">
-            <h3>Basic warning</h3>
-            <p id="free-warning"></p>
-          </div>
-
-          <div class="result-cta-box">
-            <h3>Choose your next step</h3>
-            <p class="result-cta-text">
+          <div class="upgrade-box">
+            <h4>Choose your next step</h4>
+            <p>
               You can either get the free checklist by email or unlock the full paid arrears plan.
             </p>
-
-            <div class="result-cta-actions">
-              <a
-                href="https://buy.stripe.com/test_9B6fZh3uNgunbcxaEYasg00"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn btn-primary"
-              >
-                Unlock full arrears plan
-              </a>
-
-              <button type="button" id="show-eviction-guidance" class="btn btn-secondary">
-                Show step by step eviction guidance
-              </button>
-            </div>
-
-            <p class="result-cta-note">
-              Guidance and planning only. Not legal advice or legal representation.
-            </p>
+            <a id="paidUpgradeButtonA" href="#" class="btn btn-primary">Unlock full arrears plan</a>
+            <button type="button" class="btn btn-secondary" id="showEvictionGuidanceBtn">Show step by step eviction guidance</button>
+            <p class="small-note">Guidance and planning only. Not legal advice or legal representation.</p>
           </div>
         </div>
 
-        <div class="capture-card" id="lead-capture-card">
-          <div class="section-tag">Free checklist</div>
+        <div class="card checklist-card" id="leadCard">
+          <div class="pill">Free checklist</div>
           <h2>Send me the free arrears checklist</h2>
-          <p>
+          <p class="section-text">
             Enter your first name and email to get the free arrears checklist and unlock your full tailored arrears plan on screen.
           </p>
 
-          <form id="lead-form" novalidate>
-            <div class="question-block">
-              <label for="firstName">First name</label>
-              <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required />
+          <form id="leadForm">
+            <div class="form-group">
+              <label for="leadName">First name</label>
+              <input type="text" id="leadName" placeholder="Enter your first name" required />
             </div>
 
-            <div class="question-block">
-              <label for="email">Email address</label>
-              <input type="email" id="email" name="email" placeholder="Enter your email address" required />
+            <div class="form-group">
+              <label for="leadEmail">Email address</label>
+              <input type="email" id="leadEmail" placeholder="Enter your email address" required />
             </div>
 
-            <button type="submit" class="btn btn-primary btn-full">
-              Send my free checklist
-            </button>
-
-            <p id="lead-error" class="form-error" aria-live="polite"></p>
-            <p class="small-print">
-              By continuing, you agree to receive follow up emails about your arrears checklist and related updates.
-            </p>
+            <button type="submit" class="btn btn-primary btn-full">Send my free checklist</button>
           </form>
-        </div>
-      </div>
-    </section>
 
-    <section id="paid-section" class="paid-section hidden">
-      <div class="container">
-        <div class="paid-card">
-          <div class="section-tag">Paid upgrade</div>
-          <h2>Unlock your full arrears system</h2>
-          <p class="paid-text">
-            This is for landlords who want the full process, templates, tracking tools, and structured escalation guidance.
+          <p class="small-note">
+            By continuing, you agree to receive follow up emails about your arrears checklist and related updates.
           </p>
+        </div>
 
-          <div class="paid-grid">
-            <div class="paid-feature-card">
-              <h3>What you get</h3>
-              <ul>
-                <li>Full step by step arrears action plan</li>
-                <li>Tenant letter and email templates</li>
-                <li>Downloadable arrears tracking log</li>
-                <li>Evidence checklist based on your answers</li>
-                <li>Plain English escalation guidance</li>
-              </ul>
-            </div>
+        <div class="card checklist-card hidden" id="leadSuccessCard">
+          <div class="pill">Checklist requested</div>
+          <h2 id="leadSuccessTitle">Nice one</h2>
+          <p class="section-text">Your free arrears checklist request has been captured.</p>
 
-            <div class="paid-feature-card">
-              <h3>One time payment</h3>
-              <p class="price">£19.99</p>
-              <p class="price-note">Single payment. No subscription.</p>
+          <div class="warning-box">
+            <h4>What happens next</h4>
+            <p>
+              You should check your inbox once email delivery is connected. For now, your free route is captured and your paid route stays separate.
+            </p>
+          </div>
 
-              <a
-                href="https://buy.stripe.com/test_9B6fZh3uNgunbcxaEYasg00"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn btn-primary btn-full"
-              >
-                Continue to payment
-              </a>
-
-              <p class="result-cta-note">
-                Test payment link connected for now. This will be replaced with the live payment link next.
-              </p>
-            </div>
+          <div class="upgrade-box">
+            <h4>Want the full system now?</h4>
+            <p>
+              The full arrears system includes the full action plan, templates, tracking tools, and structured escalation guidance.
+            </p>
+            <a id="paidUpgradeButtonB" href="#" class="btn btn-primary">Unlock full arrears plan</a>
+            <p class="small-note">
+              This opens the Stripe checkout. The free checklist and paid upgrade are separate routes.
+            </p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="eviction-guidance-section" class="eviction-guidance-section hidden">
+    <section id="evictionGuidanceSection" class="guidance-section hidden">
       <div class="container">
-        <div class="eviction-guidance-card">
-          <div class="section-tag">Step by step guidance</div>
+        <div class="card guidance-card">
+          <div class="pill">Step by step guidance</div>
           <h2>Eviction guidance starts with a clean arrears case</h2>
-          <p class="eviction-guidance-text">
-            If rent arrears continue, the strongest position usually comes from clean records,
-            written communication, evidence preparation, and a clear timeline.
+          <p class="section-text">
+            If rent arrears continue, the strongest position usually comes from clean records, written communication, evidence preparation, and a clear timeline.
           </p>
 
-          <ul class="eviction-guidance-list">
+          <ul class="guidance-list">
             <li>Make sure your arrears record is accurate and up to date</li>
             <li>Keep written communication with the tenant in one place</li>
             <li>Log any repair complaints and all access attempts</li>
@@ -315,65 +260,296 @@
             <li>Use the full arrears plan or paid system to prepare properly</li>
           </ul>
 
-          <div class="eviction-guidance-actions">
-            <a
-              href="https://buy.stripe.com/test_9B6fZh3uNgunbcxaEYasg00"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn btn-primary"
-            >
-              Unlock full arrears plan
-            </a>
-          </div>
+          <a id="paidUpgradeButtonC" href="#" class="btn btn-primary">Unlock full arrears plan</a>
 
-          <p class="result-cta-note">
+          <p class="small-note">
             This is guidance only and does not replace case specific legal advice.
           </p>
         </div>
       </div>
     </section>
 
-    <section id="premium-section" class="premium-section hidden">
+    <section id="paidUpgradeSection" class="paid-section hidden">
       <div class="container">
-        <div class="premium-header">
-          <div>
-            <div class="section-tag premium-tag">Full plan unlocked</div>
-            <h2 id="premium-greeting">Your full arrears action plan</h2>
-          </div>
-        </div>
-
-        <div class="premium-grid">
-          <div class="premium-card">
-            <h3>Your arrears stage</h3>
-            <p id="premium-stage"></p>
-          </div>
-
-          <div class="premium-card">
-            <h3>Your immediate priority</h3>
-            <p id="premium-priority"></p>
-          </div>
-
-          <div class="premium-card full-width">
-            <h3>Your step by step action plan</h3>
-            <ol id="premium-actions"></ol>
-          </div>
-
-          <div class="premium-card">
-            <h3>Risk flags</h3>
-            <ul id="premium-risks"></ul>
-          </div>
-
-          <div class="premium-card">
-            <h3>Evidence checklist</h3>
-            <ul id="premium-evidence"></ul>
-          </div>
-        </div>
-
-        <div class="premium-footer-card">
-          <h3>Next upgrade idea</h3>
-          <p>
-            Later you can turn this into a paid report, saved cases, printable logs, and a full evidence builder.
+        <div class="card paid-card">
+          <div class="pill">Paid upgrade</div>
+          <h2>Unlock your full arrears system</h2>
+          <p class="section-text">
+            This is for landlords who want the full process, templates, tracking tools, and structured escalation guidance.
           </p>
+
+          <div class="paid-grid">
+            <div class="paid-includes">
+              <div class="card inner-card">
+                <h3>What you get</h3>
+                <ul>
+                  <li>Full step by step arrears action plan</li>
+                  <li>Tenant letter and email templates</li>
+                  <li>Downloadable arrears tracking log</li>
+                  <li>Evidence checklist based on your answers</li>
+                  <li>Plain English escalation guidance</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="paid-buy">
+              <div class="card inner-card inner-buy-card">
+                <h3>One time payment</h3>
+                <div class="price">£19.99</div>
+                <p>Single payment. No subscription.</p>
+                <a id="stripeCheckoutButton" href="#" class="btn btn-primary btn-full">Continue to payment</a>
+                <p class="small-note">Payment button uses your Stripe checkout link.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="guarantor-system" class="guarantor-section">
+      <div class="container">
+        <div class="card guarantor-intro">
+          <div class="pill">New protection feature</div>
+          <h2>Guarantor Protection System</h2>
+          <p class="section-text">
+            Most landlords do not lose because they had no guarantor. They lose because the guarantor setup, signing trail, or evidence was weak.
+          </p>
+
+          <div class="guarantor-points">
+            <div class="card small-card">
+              <h4>Checks the process</h4>
+              <p>Direct contact, ID, ownership, signing method, witness details, and audit trail.</p>
+            </div>
+            <div class="card small-card">
+              <h4>Builds records</h4>
+              <p>Creates a structured log of what was checked, how it was signed, and where the risk points are.</p>
+            </div>
+            <div class="card small-card">
+              <h4>Reduces stupid mistakes</h4>
+              <p>Flags missing witness details, tenant-only contact chains, and weak execution methods.</p>
+            </div>
+          </div>
+
+          <button id="startGuarantorFlowBtn" class="btn btn-primary">Start guarantor protection flow</button>
+        </div>
+
+        <div id="guarantorWizard" class="card guarantor-wizard hidden">
+          <div class="wizard-top">
+            <div>
+              <div class="pill">Guarantor flow</div>
+              <h3 id="wizardStepTitle">Step 1 of 7</h3>
+            </div>
+            <div class="wizard-progress-wrap">
+              <div class="wizard-progress-bar">
+                <div id="wizardProgressFill" class="wizard-progress-fill"></div>
+              </div>
+            </div>
+          </div>
+
+          <form id="guarantorForm">
+            <div class="wizard-step active" data-step="1">
+              <h4>Guarantor details</h4>
+              <p class="section-text">Capture the guarantor details directly. Do not rely only on what the tenant says.</p>
+
+              <div class="form-group">
+                <label for="gName">Guarantor full name</label>
+                <input type="text" id="gName" placeholder="Enter full name" required />
+              </div>
+
+              <div class="form-group">
+                <label for="gEmail">Guarantor email</label>
+                <input type="email" id="gEmail" placeholder="Enter email address" required />
+              </div>
+
+              <div class="form-group">
+                <label for="gPhone">Guarantor phone</label>
+                <input type="text" id="gPhone" placeholder="Enter phone number" />
+              </div>
+
+              <div class="form-group">
+                <label for="gAddress">Guarantor address</label>
+                <textarea id="gAddress" rows="4" placeholder="Enter address"></textarea>
+              </div>
+            </div>
+
+            <div class="wizard-step" data-step="2">
+              <h4>Direct contact verification</h4>
+              <p class="section-text">You want evidence that contact happened directly with the guarantor, not only through the tenant.</p>
+
+              <div class="form-group">
+                <label for="gDirectContact">Have you contacted the guarantor directly?</label>
+                <select id="gDirectContact" required>
+                  <option value="">Select one</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+
+              <div class="alert alert-warning">
+                <strong>Warning:</strong> Tenant-only communication is a weak setup route and can create disputes later.
+              </div>
+            </div>
+
+            <div class="wizard-step" data-step="3">
+              <h4>ID and status checks</h4>
+              <p class="section-text">Log what was checked so you are not relying on memory later.</p>
+
+              <div class="form-group">
+                <label for="gIdType">ID type checked</label>
+                <select id="gIdType">
+                  <option value="">Select one</option>
+                  <option value="passport">Passport</option>
+                  <option value="licence">Driving licence</option>
+                  <option value="other">Other</option>
+                  <option value="none">Nothing checked</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="gHomeowner">Homeowner status checked?</label>
+                <select id="gHomeowner">
+                  <option value="">Select one</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                  <option value="unknown">Not sure</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="gIncomeEvidence">Income evidence checked?</label>
+                <select id="gIncomeEvidence">
+                  <option value="">Select one</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="wizard-step" data-step="4">
+              <h4>Agreement execution</h4>
+              <p class="section-text">Record how the agreement was signed and returned.</p>
+
+              <div class="form-group">
+                <label for="gExecutionMethod">How was it signed?</label>
+                <select id="gExecutionMethod">
+                  <option value="">Select one</option>
+                  <option value="inperson">In person</option>
+                  <option value="digital">Digital / email</option>
+                  <option value="agent">Handled by agent</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="gSentDirect">Was the document sent directly to the guarantor?</label>
+                <select id="gSentDirect">
+                  <option value="">Select one</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                  <option value="unknown">Not sure</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="wizard-step" data-step="5">
+              <h4>Witnessing</h4>
+              <p class="section-text">Weak witnessing is one of the easiest ways to create a mess later.</p>
+
+              <div class="form-group">
+                <label for="gWitnessName">Witness name</label>
+                <input type="text" id="gWitnessName" placeholder="Enter witness name" />
+              </div>
+
+              <div class="form-group">
+                <label for="gWitnessAddress">Witness address</label>
+                <textarea id="gWitnessAddress" rows="3" placeholder="Enter witness address"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="gWitnessRelationship">Witness relationship</label>
+                <select id="gWitnessRelationship">
+                  <option value="">Select one</option>
+                  <option value="independent">Independent</option>
+                  <option value="tenant">Tenant / connected to tenant</option>
+                  <option value="landlord">Landlord / connected to landlord</option>
+                  <option value="unknown">Not sure</option>
+                </select>
+              </div>
+
+              <div class="alert alert-warning">
+                <strong>Risk flag:</strong> Connected parties create obvious arguments later.
+              </div>
+            </div>
+
+            <div class="wizard-step" data-step="6">
+              <h4>Audit trail</h4>
+              <p class="section-text">This is where your future self either thanks you or hates you.</p>
+
+              <div class="form-group">
+                <label for="gEmailSaved">Do you still have the email chain or messages?</label>
+                <select id="gEmailSaved">
+                  <option value="">Select one</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="gIdSaved">Do you still have copies of ID or verification notes?</label>
+                <select id="gIdSaved">
+                  <option value="">Select one</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="gSignatureSaved">Do you still have the signed agreement copy?</label>
+                <select id="gSignatureSaved">
+                  <option value="">Select one</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="wizard-step" data-step="7">
+              <h4>Final review</h4>
+              <p class="section-text">Generate your protection score and see where the weak points are.</p>
+
+              <div class="review-box">
+                <p>Click finish to generate the guarantor protection summary.</p>
+              </div>
+            </div>
+
+            <div class="wizard-actions">
+              <button type="button" id="prevStepBtn" class="btn btn-secondary hidden">Back</button>
+              <button type="button" id="nextStepBtn" class="btn btn-primary">Next</button>
+              <button type="submit" id="finishWizardBtn" class="btn btn-primary hidden">Finish flow</button>
+            </div>
+          </form>
+        </div>
+
+        <div id="guarantorResult" class="card guarantor-result hidden">
+          <div class="pill">Protection summary</div>
+          <h2>Your Guarantor Protection Score: <span id="gScore">0%</span></h2>
+          <p id="gScoreMessage" class="section-text"></p>
+
+          <div class="result-grid-two">
+            <div class="card inner-card">
+              <h3>Strengths</h3>
+              <ul id="gStrengthsList"></ul>
+            </div>
+
+            <div class="card inner-card">
+              <h3>Weak points</h3>
+              <ul id="gWeaknessList"></ul>
+            </div>
+          </div>
+
+          <div class="card inner-card">
+            <h3>Your next action</h3>
+            <p id="gNextAction"></p>
+          </div>
         </div>
       </div>
     </section>
@@ -381,8 +557,8 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p>ArrearsAssist</p>
-      <p>Guidance and organisation only. Not legal advice.</p>
+      <div>ArrearsAssist</div>
+      <div>Guidance and organisation only. Not legal advice.</div>
     </div>
   </footer>
 
