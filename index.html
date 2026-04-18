@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ArrearsAssist</title>
+  <title>Arrears Action System</title>
   <meta
     name="description"
-    content="ArrearsAssist helps England private landlords understand rent arrears risk, next steps, and how to organise their case properly."
+    content="Free rent arrears checker for England private landlords. Understand your arrears stage, spot risks, and choose your next step."
   />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,7 +19,7 @@
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a href="#top" class="brand">ArrearsAssist</a>
+      <a href="#top" class="brand">Arrears Action System</a>
       <a href="#checker" class="header-link">Start free check</a>
     </div>
   </header>
@@ -28,32 +28,32 @@
     <section class="hero section">
       <div class="container hero-grid">
         <div class="card hero-card">
-          <div class="pill">England private landlords</div>
-          <h1>Rent arrears? Find your next step in 60 seconds.</h1>
+          <div class="pill">For England private landlords</div>
+          <h1>Missed rent? Find your next step in under 60 seconds.</h1>
           <p class="hero-copy">
-            Free tool to help you understand your current arrears stage, spot risk
-            issues, and see what to do next.
+            Use the free arrears checker to see how serious the situation looks,
+            where your weak spots are, and what to do next before things get worse.
           </p>
 
           <div class="hero-actions">
             <a href="#checker" class="btn btn-primary">Start free check</a>
-            <a href="#how-it-works" class="btn btn-secondary">See how it works</a>
+            <a href="#offer" class="btn btn-secondary">See full system</a>
           </div>
 
           <p class="hero-note">
-            For guidance and organisation only. Not legal advice.
+            Guidance and organisation only. Not legal advice.
           </p>
         </div>
 
-        <aside class="card side-card">
-          <div class="badge-dark">Free</div>
+        <aside class="card side-card side-card-highlight">
+          <div class="badge-dark">Free checker</div>
           <h3>What you get</h3>
           <ul class="feature-list">
             <li>Your arrears stage</li>
-            <li>Your next step</li>
-            <li>Basic risk warning</li>
+            <li>Your immediate next step</li>
+            <li>Key risk warnings</li>
             <li>Free checklist option</li>
-            <li>Paid full arrears plan option</li>
+            <li>Paid upgrade to full system</li>
           </ul>
         </aside>
       </div>
@@ -62,16 +62,16 @@
     <section class="section mini-features">
       <div class="container three-col">
         <div class="card mini-card">
-          <h3>Built for England landlords</h3>
-          <p>Focused on private landlord arrears situations only.</p>
+          <h3>Plain English</h3>
+          <p>No waffle. Just where you stand and what to do next.</p>
         </div>
         <div class="card mini-card">
-          <h3>Plain English</h3>
-          <p>No waffle. Just the next step and the risks to watch.</p>
+          <h3>Built for arrears cases</h3>
+          <p>Focused on rent arrears and landlord record keeping, not generic property admin.</p>
         </div>
         <div class="card mini-card">
           <h3>Designed to reduce mistakes</h3>
-          <p>Helps you organise before things spiral.</p>
+          <p>Helps you tighten evidence, communication, and process before the case escalates.</p>
         </div>
       </div>
     </section>
@@ -79,10 +79,10 @@
     <section id="checker" class="section checker-section">
       <div class="container checker-grid">
         <div class="card checker-card">
-          <div class="pill">Free checker</div>
+          <div class="pill">Free arrears checker</div>
           <h2>Answer these 7 questions</h2>
           <p class="subcopy">
-            This takes less than a minute. You will get a free basic result on screen.
+            This takes less than a minute. You will get a free on screen result straight away.
           </p>
 
           <form id="arrears-form" novalidate>
@@ -156,7 +156,7 @@
               </select>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-block">Get my result</button>
+            <button type="submit" class="btn btn-primary btn-block">Get my free result</button>
           </form>
         </div>
 
@@ -167,16 +167,16 @@
               <li>Arrears seriousness</li>
               <li>Payment pattern risk</li>
               <li>Disrepair risk</li>
-              <li>Access risk</li>
-              <li>Record keeping gaps</li>
+              <li>Access and evidence gaps</li>
+              <li>Record keeping weaknesses</li>
             </ul>
           </div>
 
           <div class="card side-card">
             <h3>Best for</h3>
             <p>
-              England private landlords who want a clearer next step when a tenant
-              falls behind on rent.
+              Self managing private landlords in England who want a clearer next step
+              when rent falls behind.
             </p>
           </div>
         </aside>
@@ -190,84 +190,89 @@
             <div class="pill" id="resultPill">Your free result</div>
             <h2 id="resultTitle">You are in early stage rent arrears.</h2>
 
+            <div class="result-stat-row">
+              <div class="result-stat">
+                <span class="result-stat-label">Arrears stage</span>
+                <strong id="resultStageTag">Early</strong>
+              </div>
+              <div class="result-stat">
+                <span class="result-stat-label">Risk level</span>
+                <strong id="resultRiskTag">Moderate</strong>
+              </div>
+            </div>
+
             <h3>Your next step</h3>
             <p id="resultNextStep"></p>
 
             <div class="warning-box">
-              <h3>Basic warning</h3>
+              <h3>Biggest warning</h3>
               <p id="resultWarning"></p>
             </div>
 
             <div class="upgrade-choice-box">
-              <h3>Choose your next step</h3>
+              <h3>Choose your next move</h3>
               <p>
-                You can either get the free checklist by email or unlock the full paid
-                arrears plan.
+                Start with the free checklist, or unlock the full Arrears Action System
+                if you want the full workflow, templates, logs, and guidance.
               </p>
 
               <div class="stack-actions">
+                <a href="#lead-capture" class="btn btn-secondary btn-inline">
+                  Get free checklist
+                </a>
+
                 <a
                   href="https://buy.stripe.com/6oU00j0ikevjfEk6kDafS00"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="btn btn-primary btn-inline"
                 >
-                  Unlock full arrears plan
+                  Unlock full system for £19.99
                 </a>
-
-                <button
-                  type="button"
-                  id="showGuidanceBtn"
-                  class="btn btn-secondary btn-inline"
-                >
-                  Show step by step eviction guidance
-                </button>
               </div>
 
               <p class="small-note">
-                Guidance and planning only. Not legal advice or legal representation.
+                For guidance and organisation only. Not legal advice or legal representation.
               </p>
             </div>
           </div>
 
-          <div id="guidance-panel" class="card guidance-card hidden">
-            <div class="pill">Step by step guidance</div>
-            <h2>Eviction guidance starts with a clean arrears case</h2>
-            <p>
-              If rent arrears continue, the strongest position usually comes from clean
-              records, written communication, evidence preparation, and a clear timeline.
-            </p>
+          <div class="card quick-fix-card">
+            <div class="pill">What the paid version adds</div>
+            <h2>Turn panic into a clean action plan</h2>
+            <div class="two-col compact-two-col">
+              <div class="info-box">
+                <h3>Inside the system</h3>
+                <ul class="feature-list">
+                  <li>Step by step arrears action plan</li>
+                  <li>Tenant message and email templates</li>
+                  <li>Arrears tracking log</li>
+                  <li>Evidence checklist</li>
+                  <li>Risk warnings and mistakes to avoid</li>
+                </ul>
+              </div>
 
-            <ul class="guidance-list">
-              <li>Make sure your arrears record is accurate and up to date</li>
-              <li>Keep written communication with the tenant in one place</li>
-              <li>Log any repair complaints and all access attempts</li>
-              <li>Get your evidence organised before taking bigger steps</li>
-              <li>Use the full arrears plan or paid system to prepare properly</li>
-            </ul>
-
-            <a
-              href="https://buy.stripe.com/6oU00j0ikevjfEk6kDafS00"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn btn-primary btn-inline"
-            >
-              Unlock full arrears plan
-            </a>
-
-            <p class="small-note">
-              This is guidance only and does not replace case specific legal advice.
-            </p>
+              <div class="info-box">
+                <h3>Best for landlords who want</h3>
+                <ul class="feature-list">
+                  <li>More than a basic free result</li>
+                  <li>A cleaner record before escalation</li>
+                  <li>Simple structure instead of guesswork</li>
+                  <li>A more organised file if things worsen</li>
+                  <li>A one time purchase, not more software</li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="right-results">
-          <div id="freeChecklistCard" class="card checklist-card">
+          <div id="lead-capture" class="card checklist-card">
             <div class="pill">Free checklist</div>
             <h2>Send me the free arrears checklist</h2>
             <p>
-              Enter your first name and email to get the free arrears checklist and keep
-              your paid route separate.
+              Enter your details and get the free checklist route. This is separate
+              from the paid upgrade.
             </p>
 
             <form id="lead-form" novalidate>
@@ -292,42 +297,42 @@
             </form>
 
             <p class="small-note">
-              By continuing, you agree to receive follow up emails about your arrears
-              checklist and related updates.
+              By continuing, you agree to receive follow up emails about your checklist
+              and related updates.
             </p>
           </div>
 
           <div id="checklistSuccessCard" class="card checklist-card hidden">
             <div class="pill">Checklist requested</div>
             <h2 id="successTitle">Nice one</h2>
-            <p>Your free arrears checklist request has been captured.</p>
+            <p>Your free checklist request has been captured.</p>
 
             <div class="warning-box">
               <h3>What happens next</h3>
               <p>
-                Your free route is now captured. Once email delivery is connected, this
-                is where your checklist follow up will happen.
+                Your lead has been saved. Once your email delivery is connected, this is
+                where the checklist follow up will be sent from.
               </p>
             </div>
 
             <div class="upgrade-choice-box">
-              <h3>Want the full system now?</h3>
+              <h3>Need the full system now?</h3>
               <p>
-                The full arrears system includes the full action plan, templates,
-                tracking tools, and structured escalation guidance.
+                The paid version gives you the complete arrears workflow, templates,
+                tracking log, and structured next actions.
               </p>
 
               <a
                 href="https://buy.stripe.com/6oU00j0ikevjfEk6kDafS00"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="btn btn-primary btn-inline"
+                class="btn btn-primary btn-block"
               >
-                Unlock full arrears plan
+                Unlock full system for £19.99
               </a>
 
               <p class="small-note">
-                The free checklist and paid upgrade are separate routes.
+                The free checklist and paid system are separate routes.
               </p>
             </div>
           </div>
@@ -335,46 +340,14 @@
       </div>
     </section>
 
-    <section id="how-it-works" class="section">
-      <div class="container">
-        <div class="card value-card">
-          <div class="pill">How it works</div>
-          <h2>Fix your arrears process before it costs you thousands</h2>
-          <p class="subcopy">
-            Most landlords do not lose ground because rent was late. They lose ground
-            because their paperwork, communication, and evidence are weak.
-          </p>
-
-          <div class="four-col">
-            <div class="mini-block">
-              <h3>1. Answer 7 questions</h3>
-              <p>We work out your arrears stage and likely weak points.</p>
-            </div>
-            <div class="mini-block">
-              <h3>2. Get a free result</h3>
-              <p>You see the headline risk, next step, and warning signs.</p>
-            </div>
-            <div class="mini-block">
-              <h3>3. Choose your route</h3>
-              <p>Free checklist by email or the full paid arrears system.</p>
-            </div>
-            <div class="mini-block">
-              <h3>4. Get organised</h3>
-              <p>Templates, logs, evidence prompts, and structured next actions.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
+    <section id="offer" class="section">
       <div class="container">
         <div class="card paid-card">
           <div class="pill">Paid upgrade</div>
-          <h2>Unlock your full arrears system</h2>
+          <h2>Arrears Action System</h2>
           <p class="subcopy">
-            This is for landlords who want the full process, templates, tracking tools,
-            and structured escalation guidance.
+            A one time purchase for landlords who want structure, cleaner records,
+            and a more organised arrears case.
           </p>
 
           <div class="paid-grid">
@@ -384,16 +357,16 @@
                 <li>Full step by step arrears action plan</li>
                 <li>Tenant letter and email templates</li>
                 <li>Downloadable arrears tracking log</li>
-                <li>Evidence checklist based on your answers</li>
+                <li>Evidence checklist</li>
                 <li>Plain English escalation guidance</li>
-                <li>Guarantor setup warning and checklist</li>
+                <li>Mistakes to avoid when arrears are building</li>
               </ul>
             </div>
 
             <div class="price-box">
               <h3>One time payment</h3>
               <div class="price">£19.99</div>
-              <p>Single payment. No subscription.</p>
+              <p>No subscription. Instant access after payment.</p>
               <a
                 href="https://buy.stripe.com/6oU00j0ikevjfEk6kDafS00"
                 target="_blank"
@@ -408,98 +381,65 @@
       </div>
     </section>
 
-    <section class="section">
+    <section id="how-it-works" class="section">
       <div class="container">
-        <div class="card guarantor-card">
-          <div class="pill">New protection module</div>
-          <h2>Guarantor failure warning</h2>
+        <div class="card value-card">
+          <div class="pill">How it works</div>
+          <h2>Fix your arrears process before it gets expensive</h2>
           <p class="subcopy">
-            A guarantor can look strong on paper and still collapse if the setup is sloppy.
-            This section helps landlords spot weak guarantor setups before they turn into 
-            expensive mistakes.
+            Most landlords do not lose ground because rent was late. They lose ground
+            because their record keeping, communication, and evidence are weak.
           </p>
 
-          <div class="two-col">
-            <div class="info-box">
-              <h3>Why this matters</h3>
-              <p>
-                A bad guarantor setup can leave the landlord thinking they have backup
-                when they actually have nothing useful to enforce.
-              </p>
+          <div class="four-col">
+            <div class="mini-block">
+              <h3>1. Answer 7 questions</h3>
+              <p>We work out how serious the arrears situation looks and where your weak points are.</p>
             </div>
-
-            <div class="info-box">
-              <h3>What this module should flag</h3>
-              <ul class="feature-list">
-                <li>Was the guarantor properly identified?</li>
-                <li>Was there direct communication with the guarantor?</li>
-                <li>Was income and affordability checked?</li>
-                <li>Was home ownership actually verified if relied on?</li>
-                <li>Was the guarantor document executed properly?</li>
-              </ul>
+            <div class="mini-block">
+              <h3>2. Get your free result</h3>
+              <p>You see your arrears stage, next step, and biggest warning.</p>
             </div>
-          </div>
-
-          <div class="guarantor-checklist-box">
-            <h3>Guarantor setup checklist preview</h3>
-            <ul class="feature-list">
-              <li>Get guarantor ID and keep a copy</li>
-              <li>Keep direct email trail with guarantor, not just tenant</li>
-              <li>Check address, income, and affordability evidence</li>
-              <li>Do not rely on vague assumptions about ownership or assets</li>
-              <li>Use a proper guarantor document process and store the final signed copy</li>
-            </ul>
+            <div class="mini-block">
+              <h3>3. Choose your route</h3>
+              <p>Take the free checklist or unlock the full Arrears Action System.</p>
+            </div>
+            <div class="mini-block">
+              <h3>4. Get organised</h3>
+              <p>Use templates, logs, and prompts to tighten your case before things spiral.</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="full-plan-section" class="section hidden">
+    <section class="section faq-section">
       <div class="container">
-        <div class="full-plan-header">
-          <div class="success-badge">Full plan unlocked</div>
-          <h2 id="fullPlanHeading">Here is your full arrears action plan</h2>
-        </div>
+        <div class="card faq-card">
+          <div class="pill">FAQ</div>
+          <h2>Common questions</h2>
 
-        <div class="two-col">
-          <div class="card summary-card">
-            <h3>Your arrears stage</h3>
-            <p id="fullPlanStageText"></p>
+          <div class="faq-list">
+            <div class="faq-item">
+              <h3>Is this legal advice?</h3>
+              <p>No. It is a guidance and organisation tool to help landlords understand risks, structure records, and choose next actions.</p>
+            </div>
+
+            <div class="faq-item">
+              <h3>Who is this for?</h3>
+              <p>Private landlords in England dealing with rent arrears and trying to get organised before the situation worsens.</p>
+            </div>
+
+            <div class="faq-item">
+              <h3>Do I need the paid system to use the checker?</h3>
+              <p>No. The checker is free. The paid system is for landlords who want the full workflow, templates, and tracking tools.</p>
+            </div>
+
+            <div class="faq-item">
+              <h3>Is this for agents too?</h3>
+              <p>Right now the messaging is aimed at self managing private landlords. You can expand later once the core offer converts.</p>
+            </div>
           </div>
-
-          <div class="card summary-card">
-            <h3>Your immediate priority</h3>
-            <p id="fullPlanPriorityText"></p>
-          </div>
-        </div>
-
-        <div class="card large-card">
-          <h3>Your step by step action plan</h3>
-          <ol id="fullPlanSteps" class="number-list"></ol>
-        </div>
-
-        <div class="two-col">
-          <div class="card large-card">
-            <h3>Risk flags</h3>
-            <ul id="fullPlanRisks" class="feature-list"></ul>
-          </div>
-
-          <div class="card large-card">
-            <h3>Evidence checklist</h3>
-            <ul id="fullPlanEvidence" class="feature-list"></ul>
-          </div>
-        </div>
-
-        <div class="card large-card">
-          <h3>Templates included in paid version</h3>
-          <ul class="feature-list">
-            <li>Initial arrears message template</li>
-            <li>Formal arrears warning email template</li>
-            <li>Payment chase follow up wording</li>
-            <li>Repair access record prompt</li>
-            <li>Guarantor due diligence checklist</li>
-            <li>Blank arrears logging sheet prompt</li>
-          </ul>
         </div>
       </div>
     </section>
@@ -507,7 +447,7 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <span>ArrearsAssist</span>
+      <span>Arrears Action System</span>
       <span>Guidance and organisation only. Not legal advice.</span>
     </div>
   </footer>
