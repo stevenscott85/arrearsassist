@@ -7,10 +7,11 @@
   --primary: #2563eb;
   --primary-dark: #1d4ed8;
   --secondary-bg: #e9eef9;
+  --danger: #b42318;
+  --danger-bg: #feeceb;
   --pill-bg: #e8f0ff;
   --warning-bg: #fff5e8;
   --warning-border: #f1c27b;
-  --success-bg: #e8f8ee;
   --dark-pill: #0f172a;
   --shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
   --radius: 28px;
@@ -91,6 +92,10 @@ a {
 .paid-grid,
 .two-col,
 .three-col,
+.tracker-top-grid,
+.tracker-main-grid,
+.tracker-bottom-grid,
+.summary-stats-grid,
 .four-col {
   display: grid;
   gap: 28px;
@@ -108,16 +113,17 @@ a {
 .value-card,
 .paid-card,
 .faq-card,
-.quick-fix-card {
+.quick-fix-card,
+.tracker-card {
   padding: 40px;
 }
 
 .hero-card h1,
 .result-card h2,
-.value-card h2,
 .paid-card h2,
 .faq-card h2,
-.quick-fix-card h2 {
+.quick-fix-card h2,
+.tracker-card h2 {
   margin: 18px 0 16px;
   line-height: 0.95;
   letter-spacing: -0.05em;
@@ -130,10 +136,10 @@ a {
 }
 
 .result-card h2,
-.value-card h2,
 .paid-card h2,
 .faq-card h2,
-.quick-fix-card h2 {
+.quick-fix-card h2,
+.tracker-card h2 {
   font-size: clamp(38px, 5vw, 68px);
 }
 
@@ -143,13 +149,14 @@ a {
 .small-note,
 .side-card p,
 .mini-card p,
-.mini-block p,
+.summary-card p,
 .value-card p,
 .paid-card p,
 .result-card p,
 .checklist-card p,
 .faq-card p,
-.quick-fix-card p {
+.quick-fix-card p,
+.tracker-card p {
   color: var(--muted);
   font-size: 20px;
 }
@@ -160,7 +167,8 @@ a {
 }
 
 .hero-actions,
-.stack-actions {
+.stack-actions,
+.action-stack {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
@@ -198,14 +206,14 @@ a {
 .result-card h3,
 .warning-box h3,
 .upgrade-choice-box h3,
-.value-card h3,
 .paid-card h3,
 .faq-card h3,
 .quick-fix-card h3,
 .what-you-get h3,
 .price-box h3,
 .faq-item h3,
-.info-box h3 {
+.info-box h3,
+.tracker-panel h3 {
   margin: 18px 0 14px;
   font-size: 26px;
   line-height: 1.1;
@@ -213,14 +221,12 @@ a {
   font-weight: 800;
 }
 
-.feature-list,
-.number-list {
+.feature-list {
   margin: 0;
   padding-left: 28px;
 }
 
-.feature-list li,
-.number-list li {
+.feature-list li {
   margin-bottom: 12px;
   font-size: 20px;
 }
@@ -256,7 +262,8 @@ label {
 }
 
 select,
-input {
+input,
+textarea {
   width: 100%;
   min-height: 86px;
   border-radius: 24px;
@@ -267,10 +274,18 @@ input {
   color: var(--text);
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  font-family: inherit;
+}
+
+textarea {
+  min-height: 160px;
+  padding: 18px 24px;
+  resize: vertical;
 }
 
 select:focus,
-input:focus {
+input:focus,
+textarea:focus {
   border-color: var(--primary);
   box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08);
 }
@@ -307,6 +322,11 @@ input:focus {
   color: #1f3b73;
 }
 
+.btn-danger {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
 .btn-block {
   width: 100%;
 }
@@ -333,14 +353,16 @@ input:focus {
   margin: 10px 0 24px;
 }
 
-.result-stat {
+.result-stat,
+.summary-stat {
   background: #f7f9fd;
   border: 1px solid var(--line);
   border-radius: 22px;
   padding: 20px 22px;
 }
 
-.result-stat-label {
+.result-stat-label,
+.summary-label {
   display: block;
   font-size: 14px;
   font-weight: 700;
@@ -350,7 +372,8 @@ input:focus {
   margin-bottom: 8px;
 }
 
-.result-stat strong {
+.result-stat strong,
+.summary-stat strong {
   font-size: 24px;
   font-weight: 900;
   letter-spacing: -0.03em;
@@ -364,10 +387,15 @@ input:focus {
   border-radius: 24px;
 }
 
+.small-warning {
+  margin-top: 18px;
+}
+
 .upgrade-choice-box,
 .info-box,
 .what-you-get,
-.price-box {
+.price-box,
+.tracker-panel {
   margin-top: 26px;
   padding: 30px;
   border-radius: 24px;
@@ -379,16 +407,90 @@ input:focus {
   padding: 36px 40px;
 }
 
-.value-card .four-col {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+.compact-two-col {
   margin-top: 26px;
 }
 
-.mini-block {
-  padding: 26px;
-  border-radius: 24px;
-  background: #f7f9fd;
+.tracker-top-grid {
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  margin-top: 26px;
+}
+
+.summary-stats-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.tracker-main-grid,
+.tracker-bottom-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 28px;
+}
+
+.table-wrap {
+  margin-top: 24px;
+  overflow-x: auto;
+}
+
+.tracker-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 420px;
+}
+
+.tracker-table th,
+.tracker-table td {
+  padding: 14px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  font-size: 16px;
+}
+
+.tracker-table th {
+  font-weight: 800;
+}
+
+.empty-state-cell,
+.empty-state-block {
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.timeline-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.timeline-item {
+  padding: 18px 20px;
+  border-radius: 20px;
+  background: #fff;
   border: 1px solid var(--line);
+}
+
+.timeline-date {
+  display: block;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+.timeline-title {
+  display: block;
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.timeline-text {
+  color: var(--muted);
+  font-size: 16px;
+  margin: 0;
+  white-space: pre-wrap;
 }
 
 .paid-grid {
@@ -406,10 +508,6 @@ input:focus {
 
 .two-col {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.compact-two-col {
-  margin-top: 26px;
 }
 
 .faq-list {
@@ -448,7 +546,10 @@ input:focus {
   .paid-grid,
   .two-col,
   .mini-features .three-col,
-  .value-card .four-col,
+  .tracker-top-grid,
+  .tracker-main-grid,
+  .tracker-bottom-grid,
+  .summary-stats-grid,
   .result-stat-row {
     grid-template-columns: 1fr;
   }
@@ -480,19 +581,19 @@ input:focus {
   .checker-card,
   .result-card,
   .checklist-card,
-  .value-card,
   .paid-card,
   .faq-card,
-  .quick-fix-card {
+  .quick-fix-card,
+  .tracker-card {
     padding: 24px;
   }
 
   .hero-card h1,
   .result-card h2,
-  .value-card h2,
   .paid-card h2,
   .faq-card h2,
-  .quick-fix-card h2 {
+  .quick-fix-card h2,
+  .tracker-card h2 {
     font-size: clamp(38px, 10vw, 54px);
   }
 
@@ -502,15 +603,13 @@ input:focus {
   .small-note,
   .side-card p,
   .mini-card p,
-  .mini-block p,
-  .value-card p,
   .paid-card p,
   .result-card p,
   .checklist-card p,
   .faq-card p,
   .quick-fix-card p,
-  .feature-list li,
-  .number-list li {
+  .tracker-card p,
+  .feature-list li {
     font-size: 16px;
   }
 
@@ -519,11 +618,16 @@ input:focus {
   }
 
   select,
-  input {
+  input,
+  textarea {
     min-height: 70px;
     border-radius: 18px;
     font-size: 17px;
     padding: 0 18px;
+  }
+
+  textarea {
+    padding: 16px 18px;
   }
 
   .btn {
@@ -533,7 +637,8 @@ input:focus {
   }
 
   .hero-actions,
-  .stack-actions {
+  .stack-actions,
+  .action-stack {
     flex-direction: column;
   }
 
@@ -542,6 +647,10 @@ input:focus {
     min-height: 48px;
     font-size: 15px;
     padding: 0 18px;
+  }
+
+  .tracker-table {
+    min-width: 100%;
   }
 
   .footer-inner {
