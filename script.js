@@ -1,24 +1,15 @@
 const arrearsForm = document.getElementById("arrears-form");
 const leadForm = document.getElementById("lead-form");
 const resultsSection = document.getElementById("results-section");
-const freeChecklistCard = document.getElementById("freeChecklistCard");
 const checklistSuccessCard = document.getElementById("checklistSuccessCard");
 const successTitle = document.getElementById("successTitle");
-const showGuidanceBtn = document.getElementById("showGuidanceBtn");
-const guidancePanel = document.getElementById("guidance-panel");
 
 const resultPill = document.getElementById("resultPill");
 const resultTitle = document.getElementById("resultTitle");
+const resultStageTag = document.getElementById("resultStageTag");
+const resultRiskTag = document.getElementById("resultRiskTag");
 const resultNextStep = document.getElementById("resultNextStep");
 const resultWarning = document.getElementById("resultWarning");
-
-const fullPlanSection = document.getElementById("full-plan-section");
-const fullPlanHeading = document.getElementById("fullPlanHeading");
-const fullPlanStageText = document.getElementById("fullPlanStageText");
-const fullPlanPriorityText = document.getElementById("fullPlanPriorityText");
-const fullPlanSteps = document.getElementById("fullPlanSteps");
-const fullPlanRisks = document.getElementById("fullPlanRisks");
-const fullPlanEvidence = document.getElementById("fullPlanEvidence");
 
 let currentAssessment = null;
 
@@ -64,135 +55,62 @@ function buildAssessment(values) {
   if (values.formalContact === "informal") score += 1;
   if (values.formalContact === "no") score += 3;
 
-  const serious = score >= 12;
+  let stage = "Early";
+  let risk = "Moderate";
 
-  const stageTitle = serious
-    ? "You are in serious rent arrears territory."
-    : "You are in early to mid stage rent arrears.";
-
-  const nextStep = serious
-    ? "You should move from informal chasing into structured escalation and evidence preparation."
-    : "Formally contact the tenant, start or tighten your arrears log, and record every payment issue from today.";
-
-  const warning = serious
-    ? "Serious arrears with poor records, weak communication, or repair disputes can quickly become harder to manage."
-    : "If arrears are not documented properly from the start, your position becomes weaker if the case escalates later.";
-
-  const priority = serious
-    ? "Get your arrears evidence and communication record in order before the situation worsens."
-    : "Create a clean written arrears record and tighten your communication before the case grows arms and legs.";
-
-  const risks = [];
-  const evidence = [
-    "Tenancy agreement",
-    "Rent due dates and payment history",
-    "Bank statements or rent record showing missed or short payments",
-    "Copies of messages or emails with the tenant about arrears"
-  ];
-
-  if (values.writtenRecord === "no") {
-    risks.push("You do not have a written arrears record. This is one of the biggest weaknesses in any arrears case.");
-  } else if (values.writtenRecord === "partial") {
-    risks.push("Your arrears record looks incomplete. Gaps can cause arguments later.");
+  if (score >= 12) {
+    stage = "Serious";
+    risk = "High";
+  } else if (score >= 7) {
+    stage = "Mid stage";
+    risk = "Elevated";
   }
 
-  if (values.formalContact === "no") {
-    risks.push("You have not formally contacted the tenant about arrears yet. Start written communication now.");
-  } else if (values.formalContact === "informal") {
-    risks.push("You have only used informal messages so far. Important points may not be clearly captured.");
-  }
+  const stageTitle =
+    score >= 12
+      ? "You are in serious rent arrears territory."
+      : score >= 7
+      ? "You are in mid stage rent arrears."
+      : "You are in early stage rent arrears.";
 
-  if (values.disrepairRaised !== "no") {
-    risks.push("Disrepair has been raised. You need a separate record of complaints, responses, and access attempts.");
-    evidence.push("Repair complaint timeline");
-    evidence.push("Photos, contractor notes, and access requests");
-  }
+  const nextStep =
+    score >= 12
+      ? "Move out of casual chasing and into a structured arrears process with a clean log, organised communication, and evidence in one place."
+      : score >= 7
+      ? "Tighten your arrears record, move communication into clear written form, and stop relying on memory or scattered messages."
+      : "Formally contact the tenant in writing, start or tighten your arrears log, and record every missed or short payment from today.";
 
-  if (values.accessAttempts === "yes-refused") {
-    risks.push("Access appears to have been refused or blocked. Keep dated proof of all access requests and responses.");
-    evidence.push("Access request messages and replies");
-  }
-
-  if (values.currentlyPaying === "none") {
-    risks.push("No payments are being made at all. You need your rent schedule completely up to date.");
-  }
-
-  if (values.universalCredit === "yes" || values.universalCredit === "notsure") {
-    risks.push("Universal Credit may be part of the picture. Keep your arrears figures clean and avoid guessing.");
-  }
-
-  const steps = [];
-
-  if (serious) {
-    steps.push("Update your arrears schedule so it is accurate and current.");
-    steps.push("Make sure all missed payments and partial payments are logged in writing.");
-    steps.push("Check that your tenant contact history is complete and organised.");
-    steps.push("If repairs have been raised, keep a separate record of issues, access attempts, and outcomes.");
-    steps.push("Prepare your core evidence pack so you are not scrambling later.");
-    steps.push("Build a single file or folder with payment record, communications, and repair history.");
-    steps.push("Keep communication factual, clear, and saved.");
-  } else {
-    steps.push("Create or update a rent arrears log today.");
-    steps.push("Send a clear written arrears message instead of relying on casual chasing.");
-    steps.push("Record all payment promises and whether they were kept.");
-    steps.push("If repairs are mentioned, separate the rent issue from the repair issue and document both.");
-    steps.push("Keep all evidence in one place from the start.");
-    steps.push("If the tenant starts falling further behind, move into a more structured escalation process.");
-  }
+  const warning =
+    values.writtenRecord === "no"
+      ? "Your biggest weakness is poor record keeping. If arrears grow and your log is weak, your position gets harder fast."
+      : values.disrepairRaised !== "no"
+      ? "Disrepair has been raised. If that is not tracked properly alongside access attempts and responses, the case can get messy."
+      : values.formalContact === "no"
+      ? "You have not formally contacted the tenant yet. Delay now usually creates avoidable gaps later."
+      : "If you let arrears build without a clean written trail, you make a bad situation harder to manage later.";
 
   return {
-    serious,
+    score,
+    stage,
+    risk,
     stageTitle,
     nextStep,
-    warning,
-    priority,
-    steps,
-    risks,
-    evidence
+    warning
   };
 }
 
 function renderFreeResult(assessment) {
   resultPill.textContent = "Your free result";
   resultTitle.textContent = assessment.stageTitle;
+  resultStageTag.textContent = assessment.stage;
+  resultRiskTag.textContent = assessment.risk;
   resultNextStep.textContent = assessment.nextStep;
   resultWarning.textContent = assessment.warning;
 
   resultsSection.classList.remove("hidden");
-  freeChecklistCard.classList.remove("hidden");
   checklistSuccessCard.classList.add("hidden");
-  guidancePanel.classList.add("hidden");
 
   resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
-function renderFullPlan(assessment, firstName = "there") {
-  fullPlanHeading.textContent = `${firstName}, here is your full arrears action plan`;
-  fullPlanStageText.textContent = assessment.stageTitle.replace(/\.$/, "") + ".";
-  fullPlanPriorityText.textContent = assessment.priority;
-
-  fullPlanSteps.innerHTML = "";
-  assessment.steps.forEach((step) => {
-    const li = document.createElement("li");
-    li.textContent = step;
-    fullPlanSteps.appendChild(li);
-  });
-
-  fullPlanRisks.innerHTML = "";
-  assessment.risks.forEach((risk) => {
-    const li = document.createElement("li");
-    li.textContent = risk;
-    fullPlanRisks.appendChild(li);
-  });
-
-  fullPlanEvidence.innerHTML = "";
-  assessment.evidence.forEach((item) => {
-    const li = document.createElement("li");
-    li.textContent = item;
-    fullPlanEvidence.appendChild(li);
-  });
-
-  fullPlanSection.classList.remove("hidden");
 }
 
 if (arrearsForm) {
@@ -230,73 +148,18 @@ if (leadForm) {
 
     successTitle.textContent = `Nice one, ${firstName}`;
 
-    freeChecklistCard.classList.add("hidden");
-    checklistSuccessCard.classList.remove("hidden");
-
-    const leads = JSON.parse(localStorage.getItem("arrearsAssistLeads") || "[]");
+    const leads = JSON.parse(localStorage.getItem("arrearsActionSystemLeads") || "[]");
     leads.push({
       firstName,
       email,
       assessment: currentAssessment,
       createdAt: new Date().toISOString()
     });
-    localStorage.setItem("arrearsAssistLeads", JSON.stringify(leads));
+    localStorage.setItem("arrearsActionSystemLeads", JSON.stringify(leads));
 
-    resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    checklistSuccessCard.classList.remove("hidden");
+    checklistSuccessCard.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    leadForm.reset();
   });
 }
-
-if (showGuidanceBtn) {
-  showGuidanceBtn.addEventListener("click", function () {
-    guidancePanel.classList.toggle("hidden");
-    if (!guidancePanel.classList.contains("hidden")) {
-      guidancePanel.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  });
-}
-
-/*
-  Optional manual unlock for your own testing:
-  Add ?paid=1 to the page URL after completing the free result.
-  Example:
-  https://yourdomain.co.uk/?paid=1
-*/
-(function checkManualPaidPreview() {
-  const url = new URL(window.location.href);
-  const paid = url.searchParams.get("paid");
-
-  if (paid === "1") {
-    const demoAssessment = {
-      serious: true,
-      stageTitle: "You are in serious rent arrears territory.",
-      nextStep: "You should move from informal chasing into structured escalation and evidence preparation.",
-      warning: "Serious arrears with poor records, weak communication, or repair disputes can quickly become harder to manage.",
-      priority: "Get your arrears evidence and communication record in order before the situation worsens.",
-      steps: [
-        "Update your arrears schedule so it is accurate and current.",
-        "Make sure all missed payments and partial payments are logged in writing.",
-        "Check that your tenant contact history is complete and organised.",
-        "If repairs have been raised, keep a separate record of issues, access attempts, and outcomes.",
-        "Prepare your core evidence pack so you are not scrambling later.",
-        "Build a single file or folder with your payment record, communications, and repair history.",
-        "Keep communication factual, clear, and saved."
-      ],
-      risks: [
-        "You do not have a written arrears record. This is one of the biggest weaknesses in any arrears case.",
-        "You have not formally contacted the tenant about arrears yet. Start written communication now."
-      ],
-      evidence: [
-        "Tenancy agreement",
-        "Rent due dates and payment history",
-        "Bank statements or rent record showing missed or short payments",
-        "Copies of messages or emails with the tenant about arrears",
-        "Repair complaint timeline",
-        "Access request messages and replies"
-      ]
-    };
-
-    currentAssessment = demoAssessment;
-    resultsSection.classList.remove("hidden");
-    renderFullPlan(demoAssessment, "steven");
-  }
-})();
