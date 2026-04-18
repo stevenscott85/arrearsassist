@@ -60,7 +60,7 @@ a {
 }
 
 .header-inner {
-  min-height: 102px;
+  min-height: 96px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -74,7 +74,7 @@ a {
 
 .header-link {
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--primary);
 }
 
@@ -107,10 +107,8 @@ a {
 .checklist-card,
 .value-card,
 .paid-card,
-.guarantor-card,
-.summary-card,
-.large-card,
-.guidance-card {
+.faq-card,
+.quick-fix-card {
   padding: 40px;
 }
 
@@ -118,9 +116,8 @@ a {
 .result-card h2,
 .value-card h2,
 .paid-card h2,
-.guidance-card h2,
-.guarantor-card h2,
-.full-plan-header h2 {
+.faq-card h2,
+.quick-fix-card h2 {
   margin: 18px 0 16px;
   line-height: 0.95;
   letter-spacing: -0.05em;
@@ -128,17 +125,16 @@ a {
 }
 
 .hero-card h1 {
-  font-size: clamp(58px, 7vw, 104px);
-  max-width: 900px;
+  font-size: clamp(54px, 7vw, 96px);
+  max-width: 920px;
 }
 
 .result-card h2,
 .value-card h2,
 .paid-card h2,
-.guidance-card h2,
-.guarantor-card h2,
-.full-plan-header h2 {
-  font-size: clamp(40px, 5vw, 72px);
+.faq-card h2,
+.quick-fix-card h2 {
+  font-size: clamp(38px, 5vw, 68px);
 }
 
 .hero-copy,
@@ -148,14 +144,12 @@ a {
 .side-card p,
 .mini-card p,
 .mini-block p,
-.summary-card p,
 .value-card p,
 .paid-card p,
-.guidance-card p,
-.guarantor-card p,
 .result-card p,
 .checklist-card p,
-.large-card p {
+.faq-card p,
+.quick-fix-card p {
   color: var(--muted);
   font-size: 20px;
 }
@@ -178,8 +172,7 @@ a {
 }
 
 .pill,
-.badge-dark,
-.success-badge {
+.badge-dark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -200,13 +193,6 @@ a {
   color: #fff;
 }
 
-.success-badge {
-  background: var(--success-bg);
-  color: #11824b;
-  min-height: 52px;
-  font-size: 17px;
-}
-
 .side-card h3,
 .mini-card h3,
 .result-card h3,
@@ -214,10 +200,12 @@ a {
 .upgrade-choice-box h3,
 .value-card h3,
 .paid-card h3,
-.guarantor-card h3,
-.summary-card h3,
-.large-card h3,
-.guidance-card h3 {
+.faq-card h3,
+.quick-fix-card h3,
+.what-you-get h3,
+.price-box h3,
+.faq-item h3,
+.info-box h3 {
   margin: 18px 0 14px;
   font-size: 26px;
   line-height: 1.1;
@@ -226,14 +214,12 @@ a {
 }
 
 .feature-list,
-.guidance-list,
 .number-list {
   margin: 0;
   padding-left: 28px;
 }
 
 .feature-list li,
-.guidance-list li,
 .number-list li {
   margin-bottom: 12px;
   font-size: 20px;
@@ -340,6 +326,36 @@ input:focus {
   gap: 24px;
 }
 
+.result-stat-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 10px 0 24px;
+}
+
+.result-stat {
+  background: #f7f9fd;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 20px 22px;
+}
+
+.result-stat-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+.result-stat strong {
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
 .warning-box {
   margin-top: 26px;
   padding: 30px 30px 24px;
@@ -349,13 +365,18 @@ input:focus {
 }
 
 .upgrade-choice-box,
-.guarantor-checklist-box,
-.info-box {
+.info-box,
+.what-you-get,
+.price-box {
   margin-top: 26px;
   padding: 30px;
   border-radius: 24px;
   background: #f4f7fc;
   border: 1px solid #cfdaef;
+}
+
+.quick-fix-card {
+  padding: 36px 40px;
 }
 
 .value-card .four-col {
@@ -375,14 +396,6 @@ input:focus {
   margin-top: 26px;
 }
 
-.what-you-get,
-.price-box {
-  padding: 30px;
-  border-radius: 24px;
-  background: #f7f9fd;
-  border: 1px solid var(--line);
-}
-
 .price {
   font-size: 56px;
   font-weight: 900;
@@ -395,17 +408,21 @@ input:focus {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.large-card {
-  margin-top: 24px;
+.compact-two-col {
+  margin-top: 26px;
 }
 
-.full-plan-header {
-  margin-bottom: 24px;
+.faq-list {
+  margin-top: 26px;
+  display: grid;
+  gap: 20px;
 }
 
-.summary-card,
-.large-card {
-  padding: 34px;
+.faq-item {
+  padding: 26px;
+  border-radius: 24px;
+  background: #f7f9fd;
+  border: 1px solid var(--line);
 }
 
 .site-footer {
@@ -431,7 +448,8 @@ input:focus {
   .paid-grid,
   .two-col,
   .mini-features .three-col,
-  .value-card .four-col {
+  .value-card .four-col,
+  .result-stat-row {
     grid-template-columns: 1fr;
   }
 
@@ -464,10 +482,8 @@ input:focus {
   .checklist-card,
   .value-card,
   .paid-card,
-  .guarantor-card,
-  .summary-card,
-  .large-card,
-  .guidance-card {
+  .faq-card,
+  .quick-fix-card {
     padding: 24px;
   }
 
@@ -475,9 +491,8 @@ input:focus {
   .result-card h2,
   .value-card h2,
   .paid-card h2,
-  .guidance-card h2,
-  .guarantor-card h2,
-  .full-plan-header h2 {
+  .faq-card h2,
+  .quick-fix-card h2 {
     font-size: clamp(38px, 10vw, 54px);
   }
 
@@ -488,16 +503,13 @@ input:focus {
   .side-card p,
   .mini-card p,
   .mini-block p,
-  .summary-card p,
   .value-card p,
   .paid-card p,
-  .guidance-card p,
-  .guarantor-card p,
   .result-card p,
   .checklist-card p,
-  .large-card p,
+  .faq-card p,
+  .quick-fix-card p,
   .feature-list li,
-  .guidance-list li,
   .number-list li {
     font-size: 16px;
   }
@@ -526,8 +538,7 @@ input:focus {
   }
 
   .pill,
-  .badge-dark,
-  .success-badge {
+  .badge-dark {
     min-height: 48px;
     font-size: 15px;
     padding: 0 18px;
