@@ -1,6 +1,7 @@
 const arrearsForm = document.getElementById("arrears-form");
 const leadForm = document.getElementById("lead-form");
 const resultsSection = document.getElementById("results-section");
+const trackerSection = document.getElementById("tracker-section");
 const checklistSuccessCard = document.getElementById("checklistSuccessCard");
 const successTitle = document.getElementById("successTitle");
 
@@ -11,7 +12,50 @@ const resultRiskTag = document.getElementById("resultRiskTag");
 const resultNextStep = document.getElementById("resultNextStep");
 const resultWarning = document.getElementById("resultWarning");
 
+const caseSetupForm = document.getElementById("case-setup-form");
+const paymentForm = document.getElementById("payment-form");
+const noteForm = document.getElementById("note-form");
+const printTrackerBtn = document.getElementById("printTrackerBtn");
+const clearTrackerBtn = document.getElementById("clearTrackerBtn");
+
+const summaryMonthlyRent = document.getElementById("summaryMonthlyRent");
+const summaryMonthsElapsed = document.getElementById("summaryMonthsElapsed");
+const summaryTotalDue = document.getElementById("summaryTotalDue");
+const summaryTotalPaid = document.getElementById("summaryTotalPaid");
+const summaryArrears = document.getElementById("summaryArrears");
+const summaryTrackerStage = document.getElementById("summaryTrackerStage");
+
+const paymentsTableBody = document.getElementById("paymentsTableBody");
+const timelineList = document.getElementById("timelineList");
+
 let currentAssessment = null;
+
+const STORAGE_KEY = "arrearsAssistTrackerData";
+
+let trackerData = {
+  caseSetup: {
+    monthlyRent: 0,
+    tenancyStartDate: ""
+  },
+  payments: [],
+  notes: []
+};
+
+function formatCurrency(value) {
+  return new Intl.NumberFormat("en-GB", {
+    style: "currency",
+    currency: "GBP"
+  }).format(Number(value || 0));
+}
+
+function escapeHtml(str) {
+  return String(str)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
 
 function getFormValues() {
   return {
@@ -108,9 +152,183 @@ function renderFreeResult(assessment) {
   resultWarning.textContent = assessment.warning;
 
   resultsSection.classList.remove("hidden");
+  trackerSection.classList.remove("hidden");
   checklistSuccessCard.classList.add("hidden");
 
   resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function saveTrackerData() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(trackerData));
+}
+
+function loadTrackerData() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (!raw) return;
+
+  try {
+    const parsed = JSON.parse(raw);
+    if (parsed && typeof parsed === "object") {
+      trackerData = {
+        caseSetup: parsed.caseSetup || { monthlyRent: 0, tenancyStartDate: "" },
+        payments: Array.isArray(parsed.payments) ? parsed.payments : [],
+        notes: Array.isArray(parsed.notes) ? parsed.notes : []
+      };
+    }
+  } catch (error) {
+    console.error("Could not load tracker data", error);
+  }
+}
+
+function monthsBetweenInclusive(startDateString) {
+  if (!startDateString) return 0;
+
+  const start = new Date(startDateString);
+  if (Number.isNaN(start.getTime())) return 0;
+
+  const now = new Date();
+  let months =
+    (now.getFullYear() - start.getFullYear()) * 12 +
+    (now.getMonth() - start.getMonth()) +
+    1;
+
+  if (months < 0) months = 0;
+  return months;
+}
+
+function getTrackerStage(arrears, monthlyRent) {
+  if (!monthlyRent || monthlyRent <= 0) return "Not set";
+
+  if (arrears < monthlyRent) return "Early";
+  if (arrears < monthlyRent * 2) return "Mid stage";
+  return "Serious";
+}
+
+function calculateTrackerSummary() {
+  const monthlyRent = Number(trackerData.caseSetup.monthlyRent || 0);
+  const monthsElapsed = monthsBetweenInclusive(trackerData.caseSetup.tenancyStartDate);
+  const totalDue = monthlyRent * monthsElapsed;
+
+  const totalPaid = trackerData.payments.reduce((sum, payment) => {
+    return sum + Number(payment.amount || 0);
+  }, 0);
+
+  const arrears = Math.max(totalDue - totalPaid, 0);
+  const stage = getTrackerStage(arrears, monthlyRent);
+
+  return {
+    monthlyRent,
+    monthsElapsed,
+    totalDue,
+    totalPaid,
+    arrears,
+    stage
+  };
+}
+
+function renderPaymentsTable() {
+  if (!trackerData.payments.length) {
+    paymentsTableBody.innerHTML = `
+      <tr>
+        <td colspan="3" class="empty-state-cell">No payments added yet.</td>
+      </tr>
+    `;
+    return;
+  }
+
+  const sortedPayments = [...trackerData.payments].sort((a, b) => {
+    return new Date(b.date) - new Date(a.date);
+  });
+
+  paymentsTableBody.innerHTML = sortedPayments
+    .map((payment) => {
+      return `
+        <tr>
+          <td>${escapeHtml(payment.date)}</td>
+          <td>${formatCurrency(payment.amount)}</td>
+          <td>
+            <button type="button" class="table-delete-btn" data-payment-id="${escapeHtml(payment.id)}">
+              Delete
+            </button>
+          </td>
+        </tr>
+      `;
+    })
+    .join("");
+
+  const deleteButtons = document.querySelectorAll("[data-payment-id]");
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", function () {
+      const id = button.getAttribute("data-payment-id");
+      trackerData.payments = trackerData.payments.filter((payment) => payment.id !== id);
+      saveTrackerData();
+      renderTracker();
+    });
+  });
+}
+
+function buildTimelineItems() {
+  const paymentItems = trackerData.payments.map((payment) => ({
+    date: payment.date,
+    title: "Payment received",
+    text: `${formatCurrency(payment.amount)} received`
+  }));
+
+  const noteItems = trackerData.notes.map((note) => ({
+    date: note.date,
+    title: note.type,
+    text: note.text
+  }));
+
+  return [...paymentItems, ...noteItems].sort((a, b) => {
+    return new Date(b.date) - new Date(a.date);
+  });
+}
+
+function renderTimeline() {
+  const items = buildTimelineItems();
+
+  if (!items.length) {
+    timelineList.innerHTML = `<div class="empty-state-block">No timeline entries yet.</div>`;
+    return;
+  }
+
+  timelineList.innerHTML = items
+    .map((item) => {
+      return `
+        <div class="timeline-item">
+          <span class="timeline-date">${escapeHtml(item.date)}</span>
+          <span class="timeline-title">${escapeHtml(item.title)}</span>
+          <p class="timeline-text">${escapeHtml(item.text)}</p>
+        </div>
+      `;
+    })
+    .join("");
+}
+
+function renderTrackerSummary() {
+  const summary = calculateTrackerSummary();
+
+  summaryMonthlyRent.textContent = formatCurrency(summary.monthlyRent);
+  summaryMonthsElapsed.textContent = String(summary.monthsElapsed);
+  summaryTotalDue.textContent = formatCurrency(summary.totalDue);
+  summaryTotalPaid.textContent = formatCurrency(summary.totalPaid);
+  summaryArrears.textContent = formatCurrency(summary.arrears);
+  summaryTrackerStage.textContent = summary.stage;
+}
+
+function populateSetupForm() {
+  document.getElementById("monthlyRent").value =
+    trackerData.caseSetup.monthlyRent || "";
+  document.getElementById("tenancyStartDate").value =
+    trackerData.caseSetup.tenancyStartDate || "";
+}
+
+function renderTracker() {
+  populateSetupForm();
+  renderTrackerSummary();
+  renderPaymentsTable();
+  renderTimeline();
 }
 
 if (arrearsForm) {
@@ -148,14 +366,14 @@ if (leadForm) {
 
     successTitle.textContent = `Nice one, ${firstName}`;
 
-    const leads = JSON.parse(localStorage.getItem("arrearsActionSystemLeads") || "[]");
+    const leads = JSON.parse(localStorage.getItem("arrearsAssistLeads") || "[]");
     leads.push({
       firstName,
       email,
       assessment: currentAssessment,
       createdAt: new Date().toISOString()
     });
-    localStorage.setItem("arrearsActionSystemLeads", JSON.stringify(leads));
+    localStorage.setItem("arrearsAssistLeads", JSON.stringify(leads));
 
     checklistSuccessCard.classList.remove("hidden");
     checklistSuccessCard.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -163,3 +381,106 @@ if (leadForm) {
     leadForm.reset();
   });
 }
+
+if (caseSetupForm) {
+  caseSetupForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const monthlyRentValue = Number(document.getElementById("monthlyRent").value);
+    const tenancyStartDateValue = document.getElementById("tenancyStartDate").value;
+
+    if (!monthlyRentValue || monthlyRentValue <= 0) {
+      alert("Enter a valid monthly rent figure.");
+      return;
+    }
+
+    trackerData.caseSetup.monthlyRent = monthlyRentValue;
+    trackerData.caseSetup.tenancyStartDate = tenancyStartDateValue;
+
+    saveTrackerData();
+    renderTracker();
+    alert("Case setup saved.");
+  });
+}
+
+if (paymentForm) {
+  paymentForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const paymentDate = document.getElementById("paymentDate").value;
+    const paymentAmount = Number(document.getElementById("paymentAmount").value);
+
+    if (!paymentDate || !paymentAmount || paymentAmount <= 0) {
+      alert("Enter a valid payment date and amount.");
+      return;
+    }
+
+    trackerData.payments.push({
+      id: crypto.randomUUID(),
+      date: paymentDate,
+      amount: paymentAmount
+    });
+
+    saveTrackerData();
+    renderTracker();
+    paymentForm.reset();
+  });
+}
+
+if (noteForm) {
+  noteForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const noteDate = document.getElementById("noteDate").value;
+    const noteType = document.getElementById("noteType").value;
+    const noteText = document.getElementById("noteText").value.trim();
+
+    if (!noteDate || !noteType || !noteText) {
+      alert("Complete all note fields.");
+      return;
+    }
+
+    trackerData.notes.push({
+      id: crypto.randomUUID(),
+      date: noteDate,
+      type: noteType,
+      text: noteText
+    });
+
+    saveTrackerData();
+    renderTracker();
+    noteForm.reset();
+  });
+}
+
+if (printTrackerBtn) {
+  printTrackerBtn.addEventListener("click", function () {
+    window.print();
+  });
+}
+
+if (clearTrackerBtn) {
+  clearTrackerBtn.addEventListener("click", function () {
+    const confirmed = window.confirm(
+      "Are you sure you want to clear all tracker data on this device?"
+    );
+
+    if (!confirmed) return;
+
+    trackerData = {
+      caseSetup: {
+        monthlyRent: 0,
+        tenancyStartDate: ""
+      },
+      payments: [],
+      notes: []
+    };
+
+    saveTrackerData();
+    renderTracker();
+    alert("Tracker data cleared.");
+  });
+}
+
+loadTrackerData();
+renderTracker();
