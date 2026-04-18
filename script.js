@@ -195,59 +195,65 @@ function renderFullPlan(assessment, firstName = "there") {
   fullPlanSection.classList.remove("hidden");
 }
 
-arrearsForm.addEventListener("submit", function (event) {
-  event.preventDefault();
+if (arrearsForm) {
+  arrearsForm.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-  const values = getFormValues();
+    const values = getFormValues();
 
-  if (!validateChecker(values)) {
-    alert("Fill in all 7 questions first.");
-    return;
-  }
+    if (!validateChecker(values)) {
+      alert("Fill in all 7 questions first.");
+      return;
+    }
 
-  currentAssessment = buildAssessment(values);
-  renderFreeResult(currentAssessment);
-});
-
-leadForm.addEventListener("submit", function (event) {
-  event.preventDefault();
-
-  if (!currentAssessment) {
-    alert("Complete the checker first.");
-    return;
-  }
-
-  const firstName = document.getElementById("firstName").value.trim();
-  const email = document.getElementById("emailAddress").value.trim();
-
-  if (!firstName || !email) {
-    alert("Enter your first name and email address.");
-    return;
-  }
-
-  successTitle.textContent = `Nice one, ${firstName}`;
-
-  freeChecklistCard.classList.add("hidden");
-  checklistSuccessCard.classList.remove("hidden");
-
-  const leads = JSON.parse(localStorage.getItem("arrearsAssistLeads") || "[]");
-  leads.push({
-    firstName,
-    email,
-    assessment: currentAssessment,
-    createdAt: new Date().toISOString()
+    currentAssessment = buildAssessment(values);
+    renderFreeResult(currentAssessment);
   });
-  localStorage.setItem("arrearsAssistLeads", JSON.stringify(leads));
+}
 
-  resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
-});
+if (leadForm) {
+  leadForm.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-showGuidanceBtn.addEventListener("click", function () {
-  guidancePanel.classList.toggle("hidden");
-  if (!guidancePanel.classList.contains("hidden")) {
-    guidancePanel.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-});
+    if (!currentAssessment) {
+      alert("Complete the checker first.");
+      return;
+    }
+
+    const firstName = document.getElementById("firstName").value.trim();
+    const email = document.getElementById("emailAddress").value.trim();
+
+    if (!firstName || !email) {
+      alert("Enter your first name and email address.");
+      return;
+    }
+
+    successTitle.textContent = `Nice one, ${firstName}`;
+
+    freeChecklistCard.classList.add("hidden");
+    checklistSuccessCard.classList.remove("hidden");
+
+    const leads = JSON.parse(localStorage.getItem("arrearsAssistLeads") || "[]");
+    leads.push({
+      firstName,
+      email,
+      assessment: currentAssessment,
+      createdAt: new Date().toISOString()
+    });
+    localStorage.setItem("arrearsAssistLeads", JSON.stringify(leads));
+
+    resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
+
+if (showGuidanceBtn) {
+  showGuidanceBtn.addEventListener("click", function () {
+    guidancePanel.classList.toggle("hidden");
+    if (!guidancePanel.classList.contains("hidden")) {
+      guidancePanel.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+}
 
 /*
   Optional manual unlock for your own testing:
